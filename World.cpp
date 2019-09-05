@@ -13,6 +13,7 @@ class World
        pos0- (S)stinch - wumpus in adj
        pos1- (B)breez  - pit in adj
        pos2- (V)visited
+
        WILL NOT BE VISIBLE just action
        pos3- (G)gliter or gold in room  // wins the game
        pos4- (P)pit    // looses the game
@@ -26,11 +27,11 @@ class World
 
     World();
     //initializes an empty box with no position information
-    void initEmptyBox();
+    void init_empty_world();
     //generates random positions along with sensor information
-    void generatePosition();
+    void generate_position();
     //validates is a position is valid or not if not valid then bump
-    bool isValidPos(int i , int j);
+    bool is_valid_position(int i , int j);
 
 
      
