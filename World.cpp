@@ -182,6 +182,13 @@ int World::convert_to_1d(int pos[])
     return position;
 }
 
+//converts 2d position to 1d
+int World::convert_vector_to_1d(vector<int> pos)
+{
+    int position = pos[0] + (pos[1] * 4);
+    return position;
+}
+
 // playing functons
 // turn the agent face direction
 // moving to the move_<direction> direction given current
@@ -260,7 +267,7 @@ vector<int> World::move_down(int position)
   return new_pos;
 }
 
-vector<int> World::move_up(int position)
+vector<int> World::move_top(int position)
 {
   vector<int> current_pos = convert_to_2d(position);
   vector<int> new_pos;
@@ -282,7 +289,7 @@ vector<int> World::move_forward(int current_pos, string direction)
   }else if( direction == "right"){
     return move_right(current_pos);
   }else if( direction == "up"){
-    return move_up(current_pos);
+    return move_top(current_pos);
   }else{
     return move_down(current_pos);
   }
@@ -297,16 +304,74 @@ vector<int> World::move_backward(int current_pos, string direction)
   }else if( direction == "up"){
     return move_down(current_pos);
   }else{
-    return move_up(current_pos);
+    return move_top(current_pos);
   }
 }
 // shoot the wumpus
-//kills the wumpus
-void World::shoot() {}
+// kills the wumpus
+// void World::shoot() {}
 // checks if the agent can shoot the wumpus
-bool World::can_shoot() {}
-//kills the agent
-void World::kill_Agent() {}
-//checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,
-// can be called after every action(move, shoot)
-bool World::is_game_over() {}
+// bool World::can_shoot() {}
+
+// check if arrow is left
+bool World::is_arrow_left(Agent agent){
+  return agent.getArrowStatus();
+}
+
+// check if wumpus found in a given direction from a given positon
+int World::is_wumpus_found(int current_pos, string direction){
+  int wumpus_pos = -1;
+  int current_pos_1d = current_pos;
+  vector<int> current_pos_2d = World::convert_to_2d(current_pos_1d);
+  if(direction == "left"){
+    // iterator until it reach left edge and check if wumpus exist in the rooms
+    // found in the left direction of the given position.
+    while(current_pos_2d[1] >= 0){
+      current_pos_1d = convert_vector_to_1d(current_pos_2d);
+      if(boxes[current_pos_1d].get_wumpus()){
+        wumpus_pos = current_pos_1d;
+      }
+      current_pos_2d[1] = current_pos_2d[1] - 1;
+    }
+  }else if(direction == "right"){
+    while(current_pos_2d[1] <= 3){
+      current_pos_1d = convert_vector_to_1d(current_pos_2d);
+      if(boxes[current_pos_1d].get_wumpus()){
+        wumpus_pos = current_pos_1d;
+      }
+      current_pos_2d[1] = current_pos_2d[1] + 1;
+    }
+  }else if(direction == "down"){
+    while(current_pos_2d[1] >= 0){
+      current_pos_1d = convert_vector_to_1d(current_pos_2d);
+      if(boxes[current_pos_1d].get_wumpus()){
+        wumpus_pos = current_pos_1d;
+      }
+      current_pos_2d[1] = current_pos_2d[1] - 1;
+    }
+  }else{
+    while(current_pos_2d[0] <= 3){
+      current_pos_1d = convert_vector_to_1d(current_pos_2d);
+      if(boxes[current_pos_1d].get_wumpus()){
+        wumpus_pos = current_pos_1d;
+      }
+      current_pos_2d[0] = current_pos_2d[0] + 1;
+    }
+  }
+  return wumpus_pos;
+}
+
+// shoot on the wumpus if it is been founded
+void World::shoot(int current_pos, string direction){
+  if(is_arrow_left()){
+    int wumpus_pos = is_wumpus_found(current_pos, direction);
+    if(wumpus_pos != -1){
+      boxes[wumpus_pos].set_wumpus(false);
+      //gets adjacent nodes
+      vector<int> adjacents = get_adjacent_rooms(wumpus_pos);
+      for(int i=0;i<adjacents.size();i++){
+          boxes[adjacents.at(i)].set_stench(false);
+      }
+    }
+  }
+}

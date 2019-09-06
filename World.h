@@ -16,7 +16,7 @@ class World
 {
 private:
 
-     Room boxes[16];
+    Room boxes[16];
     //records current position of the player
     int static pos;
     bool is_wumpus_dead;
@@ -45,6 +45,8 @@ public:
     vector<int> convert_to_2d(int position);
     //converts 2d position to 1d
     int convert_to_1d(int pos[]);
+    // convert vector 2D position to 1D
+    int convert_vector_to_1d(vector<int> pos);
 
     // playing functons
     //moving to the move_<direction> direction given current
@@ -55,20 +57,21 @@ public:
     vector<int> move_left(int c_pos = pos);
     vector<int> move_right(int c_pos = pos);
     vector<int> move_down(int c_pos = pos);
-    vector<int> move_up(int c_pos = pos);
+    vector<int> move_top(int c_pos = pos);
 
     vector<int> move_forward(int current_pos, string direction);
     vector<int> move_backward(int current_pos, string direction);
 
     // shoot the wumpus
     //kills the wumpus
-    void shoot();
+    // void shoot();
     // checks if the agent can shoot the wumpus
-    bool can_shoot();
-    //kills the agent
-    void kill_Agent();
-    //checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,
-    // can be called after every action(move, shoot)
-    bool is_game_over();
+    // bool can_shoot();
+
+    bool is_arrow_left(Agent agent);
+
+    int is_wumpus_found(int current_pos, string direction);
+
+    void shoot(int current_pos, string direction);
 };
 #endif
