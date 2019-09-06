@@ -27,12 +27,20 @@ public:
     void init_empty_world();
     //generates random positions along with sensor information
     void generate_position();
+    //creates a wumpus room at position and initialize a stench in adjacent rooms
+    void create_wumpus(vector<int> wumpus);
+    //creates a pit room at position and initialize a breez in adjacent rooms
+    void create_pit(vector<int> pit);
+    //creates a gold room at position and initialize a glitter in the rooms
+    void create_gold(vector<int> gold);
+    //returns adjacent rooms
+    vector<int> get_adjacent_rooms(int positon);
     //validates is a position is valid or not if not valid then bump
     bool is_valid_position(int i, int j);
     //checks if there is a way between the agent position(0,0) and the gold at
     bool check_percolaton(int agent_pos, int gold_position);
     //converts 1d position to 2d
-    int *convert_to_2d(int position);
+    vector<int> convert_to_2d(int position);
     //converts 2d position to 1d
     int convert_to_1d(int pos[]);
 
