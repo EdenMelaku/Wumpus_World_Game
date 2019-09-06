@@ -2,7 +2,7 @@
      Room includes sensor informations for a single box in the world in the form bool
     
        WILL BE VISIBLE WHEN IN THE ROOM
-       pos0- (S)stinch - wumpus in adj
+       pos0- (S)stench - wumpus in adj
        pos1- (B)breez  - pit in adj
        pos2- (V)visited
 
@@ -19,29 +19,30 @@
 #ifndef ROOM_H
 #define ROOM_H
 
-#include <vector>
-using namespace std;
 
 class Room
 {
 private:
-    bool stinch;
     bool breez;
+    bool stench;
+   
     bool visited;
     bool gliter;
     bool pit;
     bool wumpus;
 
 public:
-//sets the value of the sensor information to the given bool val;
-    void set_stinch(bool val);
+    Room();
+    //sets the value of the sensor information to the given bool val;
+    void set_stench(bool val);
     void set_breez(bool val);
     void set_visited(bool val);
     void set_gliter(bool val);
     void set_pit(bool val);
     void set_wumpus(bool val);
-//can return the sensor information
-    bool get_stinch();
+
+    //can return the sensor information
+    bool get_stench();
     bool get_breez();
     bool get_visited();
     bool get_gliter();
