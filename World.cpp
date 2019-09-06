@@ -375,3 +375,25 @@ void World::shoot(int current_pos, string direction){
     }
   }
 }
+
+//kills the agent
+void World::kill_agent(Agent agent)
+{
+  int agent_pos = agent.getPosition();
+  if(boxes[agent_pos].get_wumpus() == true || boxes[agent_pos].get_pit() == true){
+    agent.setHealthStatus("dead");
+  }
+}
+
+//checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,
+// can be called after every action(move, shoot)
+bool World::is_game_over(Agent agent)
+{
+  if(agent.getHealthStatus() == "dead"){
+    return true;
+  }else if(agent.getGold()){
+    return true;
+  }else{
+    return false;
+  }
+}

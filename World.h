@@ -69,9 +69,12 @@ public:
     // bool can_shoot();
 
     bool is_arrow_left(Agent agent);
-
     int is_wumpus_found(int current_pos, string direction);
-
     void shoot(int current_pos, string direction);
+    //kills the agent
+    void kill_agent();
+    //checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,
+    // can be called after every action(move, shoot)
+    bool is_game_over();
 };
 #endif
