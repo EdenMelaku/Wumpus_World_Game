@@ -1,10 +1,11 @@
-/* 
+/*
 this is a wumpus world Environment implementation code .
 
 
 */
 
 #include <cstdlib>
+#include <string>
 #include <vector>
 #include <set>
 #include <ctime>
@@ -95,9 +96,9 @@ void World::create_wumpus(vector<int> wumpus){
      int point=convert_to_1d(pos);
      //create the wumpus
      boxes[point].set_wumpus(true);
-    
+
     //initialize  stench on adjacent nodes
-   
+
     //gets adjacent nodes
     vector<int> adjacents = get_adjacent_rooms(point);
     for(int i=0;i<adjacents.size();i++){
@@ -114,9 +115,9 @@ void World::create_pit(vector<int> pit){
      int point=convert_to_1d(pos);
      //create the pit
      boxes[point].set_pit(true);
-    
+
     //initialize breez on adjacent nodes
-   
+
     //gets adjacent nodes
     vector<int> adjacents = get_adjacent_rooms(point);
     for(int i=0;i<adjacents.size();i++){
@@ -182,12 +183,123 @@ int World::convert_to_1d(int pos[])
 }
 
 // playing functons
-//moving to the move_<direction> direction given current
-//position (c_pos) default current position (pos)
-void World::move_left(int c_pos = pos) {}
-void World::move_right(int c_pos = pos) {}
-void World::move_up(int c_pos = pos) {}
-void World::move_down(int c_pos = pos) {}
+// turn the agent face direction
+// moving to the move_<direction> direction given current
+// position (c_pos) default current position (pos)
+// turn left or right
+string World::turn_left(string direction)
+{
+  string updated_direction;
+  if( direction == "top" ){
+    updated_direction = "left";
+  }else if( direction == "bottom" ){
+    updated_direction = "right";
+  }else if( direction == "left" ){
+    updated_direction = "bottom";
+  }else{
+    updated_direction = "top";
+  }
+  return updated_direction;
+}
+
+string World::turn_right(string direction)
+{
+  string updated_direction;
+  if( direction == "top" ){
+    updated_direction = "right";
+  }else if( direction == "bottom" ){
+    updated_direction = "left";
+  }else if( direction == "left" ){
+    updated_direction = "top";
+  }else{
+    updated_direction = "bottom";
+  }
+  return updated_direction;
+}
+
+// move left, right, top, bottom
+vector<int> World::move_left(int position)
+{
+  vector<int> current_pos = convert_to_2d(position);
+  vector<int> new_pos;
+  if(current_pos[1] == 0){
+    new_pos[0] = current_pos[0];
+    new_pos[1] = current_pos[1];
+  }else{
+    new_pos[0] = current_pos[0];
+    new_pos[1] = current_pos[1] - 1;
+  }
+  return new_pos;
+}
+
+vector<int> World::move_right(int position)
+{
+  vector<int> current_pos = convert_to_2d(position);
+  vector<int> new_pos;
+  if(current_pos[1] == 0){
+    new_pos[0] = current_pos[0];
+    new_pos[1] = current_pos[1];
+  }else{
+    new_pos[0] = current_pos[0];
+    new_pos[1] = current_pos[1] + 1;
+  }
+  return new_pos;
+}
+
+vector<int> World::move_down(int position)
+{
+  vector<int> current_pos = convert_to_2d(position);
+  vector<int> new_pos;
+  if(current_pos[0] == 0){
+    new_pos[0] = current_pos[0];
+    new_pos[1] = current_pos[1];
+  }else{
+    new_pos[0] = current_pos[0] - 1;
+    new_pos[1] = current_pos[1];
+  }
+  return new_pos;
+}
+
+vector<int> World::move_up(int position)
+{
+  vector<int> current_pos = convert_to_2d(position);
+  vector<int> new_pos;
+  if(current_pos[0] == 0){
+    new_pos[0] = current_pos[0];
+    new_pos[1] = current_pos[1];
+  }else{
+    new_pos[0] = current_pos[0] + 1;
+    new_pos[1] = current_pos[1];
+  }
+  return new_pos;
+}
+
+// move forward or backward
+vector<int> World::move_forward(int current_pos, string direction)
+{
+  if( direction == "left" ){
+    return move_left(current_pos);
+  }else if( direction == "right"){
+    return move_right(current_pos);
+  }else if( direction == "up"){
+    return move_up(current_pos);
+  }else{
+    return move_down(current_pos);
+  }
+}
+
+vector<int> World::move_backward(int current_pos, string direction)
+{
+  if( direction == "left" ){
+    return move_right(current_pos);
+  }else if( direction == "right"){
+    return move_left(current_pos);
+  }else if( direction == "up"){
+    return move_down(current_pos);
+  }else{
+    return move_up(current_pos);
+  }
+}
 // shoot the wumpus
 //kills the wumpus
 void World::shoot() {}

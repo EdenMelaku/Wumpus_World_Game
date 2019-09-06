@@ -1,19 +1,21 @@
-/* 
+/*
 this is a wumpus world Environment header file.
-it includes the attributes and methods that has to be included in the world 
+it includes the attributes and methods that has to be included in the world
 includes the Room.h file which is the implmentation for each box from the 16
 
 */
 
 #ifndef WORLD_H
 #define WORLD_H
+#include <string>
+#include <vector>
 #include "Room.h"
 using namespace std;
 
 class World
 {
 private:
-    
+
      Room boxes[16];
     //records current position of the player
     int static pos;
@@ -47,10 +49,17 @@ public:
     // playing functons
     //moving to the move_<direction> direction given current
     //position (c_pos) default current position (pos)
-    void move_left(int c_pos = pos);
-    void move_right(int c_pos = pos);
-    void move_up(int c_pos = pos);
-    void move_down(int c_pos = pos);
+    string turn_left(string direction);
+    string turn_right(string direction);
+
+    vector<int> move_left(int c_pos = pos);
+    vector<int> move_right(int c_pos = pos);
+    vector<int> move_down(int c_pos = pos);
+    vector<int> move_up(int c_pos = pos);
+
+    vector<int> move_forward(int current_pos, string direction);
+    vector<int> move_backward(int current_pos, string direction);
+
     // shoot the wumpus
     //kills the wumpus
     void shoot();
