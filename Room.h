@@ -1,53 +1,39 @@
-/* 
-     Room includes sensor informations for a single box in the world in the form bool
-    
-       WILL BE VISIBLE WHEN IN THE ROOM
-       pos0- (S)stench - wumpus in adj
-       pos1- (B)breez  - pit in adj
-       pos2- (V)visited
-
-       WILL NOT BE VISIBLE just action
-       pos3- (G)gliter or gold in room  // wins the game
-       pos4- (P)pit    // looses the game
-       pos5- (W)wumpus  // wumpus is dead
-       
-       
-    
-
-*/
-
 #ifndef ROOM_H
 #define ROOM_H
 
+#include <tuple>
 
+
+using namespace std;
+
+enum class Occupant
+{
+    wumpus = 1,
+    pit,
+    gold
+};
 class Room
 {
-private:
-    bool breez;
-    bool stench;
-   
-    bool visited;
-    bool gliter;
-    bool pit;
-    bool wumpus;
-
 public:
-    Room();
-    //sets the value of the sensor information to the given bool val;
-    void set_stench(bool val);
-    void set_breez(bool val);
-    void set_visited(bool val);
-    void set_gliter(bool val);
-    void set_pit(bool val);
-    void set_wumpus(bool val);
-
-    //can return the sensor information
-    bool get_stench();
-    bool get_breez();
-    bool get_visited();
-    bool get_gliter();
-    bool get_pit();
-    bool get_wumpus();
+        Room(int row, int column);
+        pair<int, int> getLocation();
+        void make_breeze();
+        bool has_breeze();
+        void make_stench();
+        bool has_stench();
+        void make_glitter();
+        bool has_glitter();
+        void set_occupant(Occupant occupant);
+        bool has_wumpus();
+        bool has_pit();
+        bool has_gold();
+    private:
+        pair<int, int> location;
+        Occupant occupant;
+        Occupant get_occupant();
+        bool breeze;
+        bool stench;
+        bool glitter;
 };
 
 #endif;
