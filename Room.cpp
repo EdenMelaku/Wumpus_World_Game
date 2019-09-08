@@ -1,79 +1,55 @@
-/* 
-     Room includes sensor informations for a single box in the world in the form bool
-    
-       WILL BE VISIBLE WHEN IN THE ROOM
-       pos0- (S)stench - wumpus in adj
-       pos1- (B)breez  - pit in adj
-       pos2- (V)visited
-
-       WILL NOT BE VISIBLE just action
-       pos3- (G)gliter or gold in room  // wins the game
-       pos4- (P)pit    // looses the game
-       pos5- (W)wumpus  // wumpus is dead
-       
-       
-    
-
-*/
 #include "Room.h"
 
-using namespace std;
 
-Room::Room()
+Room::Room(int row, int column)
 {
-    set_breez(false);
-    set_stench(false);
-    set_visited(false);
-    set_gliter(false);
-    set_pit(false);
-    set_wumpus(false);
+    location = make_pair(row, column);
 }
-//sets the value of the sensor information to the given bool val;
-void Room::set_stench(bool val)
+pair<int, int> Room::getLocation()
 {
-    stench = val;
+    return location;
 }
-void Room::set_breez(bool val)
+void Room::make_breeze()
 {
-    breez = val;
+    breeze = true;
 }
-
-void Room::set_visited(bool val)
+bool Room::has_breeze()
 {
-    visited = val;
+    return breeze;
 }
-void Room::set_gliter(bool val)
+void Room::make_stench()
 {
-    gliter = val;
+    stench = true;
 }
-void Room::set_pit(bool val)
+bool Room::has_stench()
 {
-    pit = val;
-}
-void Room::set_wumpus(bool val)
-{
-    wumpus = val;
-}
-
-//can return the sensor information
-bool Room::get_stench(){
     return stench;
 }
-bool Room::get_breez(){
-    return breez;
-}
-bool Room::get_visited(){
-    return visited;
-}
-bool Room::get_gliter()
+void Room::make_glitter()
 {
-    return gliter;
+    glitter = true;
 }
-bool Room::get_pit()
+bool Room::has_glitter()
 {
-return pit;
+    return glitter;
 }
-bool Room::get_wumpus()
+void Room::set_occupant(Occupant setOccupant)
 {
-    return wumpus;
+    occupant = setOccupant;
+}
+Occupant Room::get_occupant()
+{
+    return occupant;
+}
+bool Room::has_wumpus()
+{
+    return (occupant == Occupant::wumpus);
+}
+bool Room::has_pit()
+{
+    return (occupant == Occupant::pit);
+}
+bool Room::has_gold()
+{
+    return (occupant == Occupant::gold);
 }
