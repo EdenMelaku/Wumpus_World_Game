@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+// #include <tuple>
 
 using namespace std;
 
@@ -26,8 +27,8 @@ class Actuator
   // checks if the agent can shoot the wumpus
   // bool can_shoot();
 
-  bool is_arrow_left(Agent agent);
-  int is_wumpus_found(int current_pos, string direction);
+  // bool is_arrow_left(Agent agent);
+  bool is_wumpus_found(vector<int> current_pos, string direction);
   void shoot(int current_pos, string direction);
   //kills the agent
   void kill_agent();
