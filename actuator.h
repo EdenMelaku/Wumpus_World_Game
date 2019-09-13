@@ -1,38 +1,38 @@
 #include <iostream>
 #include <string>
-#include <vector>
-// #include <tuple>
+#include <tuple>
 
 using namespace std;
 
 class Actuator
 {
-  // playing functons
-  //moving to the move_<direction> direction given current
-  //position (c_pos) default current position (pos)
-  string turn_left(string direction);
-  string turn_right(string direction);
+private:
+  pair<int, int> agent_location;
+  string agent_direction;
 
-  vector<int> move_left(int current_pos);
-  vector<int> move_right(int current_pos);
-  vector<int> move_down(int current_pos);
-  vector<int> move_top(int current_pos);
+public:
+  // the class constructor
+  Actuator(pair<int, int> agent_location, string agent_direction);
 
-  vector<int> move_forward(int current_pos, string direction);
-  vector<int> move_backward(int current_pos, string direction);
+  // getter and setter for agent_location attribute
+  pair<int, int> get_agent_location();
+  void set_agent_location(pair<int, int>);
 
-  // shoot the wumpus
-  //kills the wumpus
-  // void shoot();
-  // checks if the agent can shoot the wumpus
-  // bool can_shoot();
+  // getter and setter for agent_direction attrubute
+  string get_agent_direction();
+  void set_agent_direction(string agent_direction);
 
-  // bool is_arrow_left(Agent agent);
-  bool is_wumpus_found(vector<int> current_pos, string direction);
-  void shoot(int current_pos, string direction);
-  //kills the agent
-  void kill_agent();
-  //checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,
-  // can be called after every action(move, shoot)
-  bool is_game_over();
-}
+  // turn left or right from current agent direction
+  string turn_left();
+  string turn_right();
+
+  // move left, right, down or top
+  void move_left();
+  void move_right();
+  void move_down();
+  void  move_top();
+
+  // move forward or backward
+  pair<int, int> move_forward();
+  pair<int, int> move_backward();
+};
