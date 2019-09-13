@@ -1,6 +1,4 @@
-#include <iostream>
-#include <string>
-#include <tuple>
+#include "World.h"
 
 using namespace std;
 
@@ -35,4 +33,13 @@ public:
   // move forward or backward
   pair<int, int> move_forward();
   pair<int, int> move_backward();
+
+  // check if wumpus is in line sight of the agent
+  bool is_wumpus_in_line_sight();
+  void shoot(bool has_arrow);
+  //kills the agent
+  void kill_agent();
+  //checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,
+  // can be called after every action(move, shoot)
+  bool is_game_over();
 };

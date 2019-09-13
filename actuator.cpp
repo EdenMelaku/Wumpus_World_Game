@@ -147,6 +147,79 @@ pair<int, int> Actuator::move_backward()
   return get_agent_location();
 }
 
+bool Actuator::is_wumpus_in_line_sight(){
+  pair<int, int> agent_location = get_agent_location();
+  string agent_direction = get_agent_direction();
+  pair<int, int> wumpus_location = Actuator::get_wumpus_location();
+  if(agent_direction == "left"){
+    // if the agent and the wumpus are at the same row and wumpus is infront of the agent
+    if(agent_location.first == wumpus_location.first && agent_location.second >= wumpus_location.second){
+      return true;
+    }else{
+      return false;
+    }
+  }else if(agent_direction == "right"){
+    // if the agent and the wumpus are at the same row and wumpus is infront of the agent
+    if(agent_location.first == wumpus_location.first && agent_location.second <= wumpus_location.second){
+      return true;
+    }else{
+      return false;
+    }
+  }else if(agent_direction == "down"){
+    // if the agent and the wumpus are at the same column and wumpus is infront of the agent
+    if(agent_location.second == wumpus_location.second && agent_location.first >= wumpus_location.first){
+      return true;
+    }else{
+      return false;
+    }
+  }else{
+    // if the agent and the wumpus are at the same column and wumpus is infront of the agent
+    if(agent_location.first == wumpus_location.first && agent_location.first <= wumpus_location.first){
+      return true;
+    }else{
+      return false;
+    }
+  }
+}
+
+// shoot on the wumpus if it is been founded
+void Actuator::shoot(bool has_arrow){
+  pair<int, int> wumpus_location = World::get_wumpus_location();
+  if(has_arrow){
+    if(is_wumpus_in_line_sight()){
+      World::remove_wumpus(wumpus_location);
+      // //gets adjacent nodes
+      // vector<pair<int, int>> adjacents = World::get_adjacent_rooms(wumpus_pos);
+      // for(int i=0;i<adjacents.size();i++){
+      //     World::grid[adjacents.first][adjacents.second].set_stench(false);
+      // }
+    }
+  }
+}
+
+//kills the agent
+void Actuator::kill_agent()
+{
+  pair<int, int> agent_location = Actuator::get_agent_location();
+  pair<int, int> wumpus_location = World::get_wumpus_location();
+  vector<pair<int, int>> pit_locations = World::get_pit_location();
+  if(agent_location == wumpus_location || agent_location == pit_locations){
+    Agent::set_alive(false);
+  }
+}
+
+//checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,
+// can be called after every action(move, shoot)
+bool Actuator::is_game_over()
+{
+  if(!agent::get_alive()){
+    return true;
+  }else if(agent::get_found_gold()){
+    return true;
+  }else{
+    return false;
+  }
+}
 int main(int argc, char const *argv[]) {
   cout << "this is simple test on the actuaror class\n";
   pair<int, int> agent_location = make_pair(1, 1);
