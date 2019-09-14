@@ -17,20 +17,41 @@ class World
 private:
 
     Room boxes[16];
+    int row = 4;
+    int column = 4;
+    Room grid[row][column];
     //records current position of the player
     int static pos;
     bool is_wumpus_dead;
     bool is_agent_dead;
     bool is_gold_found;
 
+    pair<int, int> wumpus_location;
+    vector<pair<int, int>> pit_locations;
+    pair<int, int> gold_location;
+
 public:
     World();
     //initializes an empty box with no position information
+    // getter and setter for wumpus_location attribute
+    pair<int, int> get_wumpus_location();
+    void set_wumpus_location(pair<int, int> wumpus_location);
+
+    // getter and setter for pit_locations attribute
+    vector<pair<int, int>> get_pit_locations();
+    void set_pit_locations(vector<pair<int, int>> pit_locations);
+
+    // getter and setter for gold_location attribute
+    pair<int, int> get_gold_location();
+    void set_gold_location(pair<int, int>);
+
     void init_empty_world();
     //generates random positions along with sensor information
     void generate_position();
     //creates a wumpus room at position and initialize a stench in adjacent rooms
     void create_wumpus(vector<int> wumpus);
+    // remove wumpus
+    void remove_wumpus();
     //creates a pit room at position and initialize a breez in adjacent rooms
     void create_pit(vector<int> pit);
     //creates a gold room at position and initialize a glitter in the rooms
@@ -41,40 +62,5 @@ public:
     bool is_valid_position(int i, int j);
     //checks if there is a way between the agent position(0,0) and the gold at
     bool check_percolaton(int agent_pos, int gold_position);
-    //converts 1d position to 2d
-    vector<int> convert_to_2d(int position);
-    //converts 2d position to 1d
-    int convert_to_1d(int pos[]);
-    // convert vector 2D position to 1D
-    int convert_vector_to_1d(vector<int> pos);
-
-    // playing functons
-    //moving to the move_<direction> direction given current
-    //position (c_pos) default current position (pos)
-    string turn_left(string direction);
-    string turn_right(string direction);
-
-    vector<int> move_left(int c_pos = pos);
-    vector<int> move_right(int c_pos = pos);
-    vector<int> move_down(int c_pos = pos);
-    vector<int> move_top(int c_pos = pos);
-
-    vector<int> move_forward(int current_pos, string direction);
-    vector<int> move_backward(int current_pos, string direction);
-
-    // shoot the wumpus
-    //kills the wumpus
-    // void shoot();
-    // checks if the agent can shoot the wumpus
-    // bool can_shoot();
-
-    bool is_arrow_left(Agent agent);
-    int is_wumpus_found(int current_pos, string direction);
-    void shoot(int current_pos, string direction);
-    //kills the agent
-    void kill_agent();
-    //checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,
-    // can be called after every action(move, shoot)
-    bool is_game_over();
 };
 #endif
