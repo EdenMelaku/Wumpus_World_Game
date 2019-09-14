@@ -35,8 +35,9 @@ public:
   pair<int, int> move_backward();
 
   // check if wumpus is in line sight of the agent
-  bool is_wumpus_in_line_sight();
-  void shoot(bool has_arrow);
+  bool is_wumpus_in_line_sight(pair<int, int> wumpus_location);
+  void shoot();
+  void grab_gold();
   //kills the agent
   void kill_agent();
   //checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,

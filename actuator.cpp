@@ -147,10 +147,9 @@ pair<int, int> Actuator::move_backward()
   return get_agent_location();
 }
 
-bool Actuator::is_wumpus_in_line_sight(){
+bool Actuator::is_wumpus_in_line_sight(pair<int, int> wumpus_location){
   pair<int, int> agent_location = get_agent_location();
   string agent_direction = get_agent_direction();
-  pair<int, int> wumpus_location = Actuator::get_wumpus_location();
   if(agent_direction == "left"){
     // if the agent and the wumpus are at the same row and wumpus is infront of the agent
     if(agent_location.first == wumpus_location.first && agent_location.second >= wumpus_location.second){
@@ -183,16 +182,12 @@ bool Actuator::is_wumpus_in_line_sight(){
 }
 
 // shoot on the wumpus if it is been founded
-void Actuator::shoot(bool has_arrow){
+void Actuator::shoot(){
   pair<int, int> wumpus_location = World::get_wumpus_location();
+  bool has_arrow = Agent::get_has_arrow();
   if(has_arrow){
-    if(is_wumpus_in_line_sight()){
-      World::remove_wumpus(wumpus_location);
-      // //gets adjacent nodes
-      // vector<pair<int, int>> adjacents = World::get_adjacent_rooms(wumpus_pos);
-      // for(int i=0;i<adjacents.size();i++){
-      //     World::grid[adjacents.first][adjacents.second].set_stench(false);
-      // }
+    if(is_wumpus_in_line_sight(wumpus_location)){
+      World::remove_wumpus();
     }
   }
 }
@@ -212,9 +207,9 @@ void Actuator::kill_agent()
 // can be called after every action(move, shoot)
 bool Actuator::is_game_over()
 {
-  if(!agent::get_alive()){
+  if(!Agent::get_alive()){
     return true;
-  }else if(agent::get_found_gold()){
+  }else if(Agent::get_found_gold()){
     return true;
   }else{
     return false;
