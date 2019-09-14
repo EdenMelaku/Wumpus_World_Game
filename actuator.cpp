@@ -25,6 +25,28 @@ void Actuator::set_agent_direction(string agent_direction)
   Actuator::agent_direction = agent_direction;
 }
 
+// getter and setter for scream attribute
+bool Actuator::get_scream()
+{
+  return Actuator::scream;
+}
+
+void Actuator::set_scream(bool scream)
+{
+  Actuator::scream = scream;
+}
+
+// getter and setter for bump attribute
+bool Actuator::get_bump()
+{
+  return Actuator::bump;
+}
+
+void Actuator::set_bump(bool bump)
+{
+  Actuator::bump = bump;
+}
+
 string Actuator::turn_left()
 {
   string agent_direction = get_agent_direction();
@@ -64,6 +86,7 @@ void Actuator::move_left()
     // if agent location is in the left edge
     updated_agent_location.first = agent_location.first;
     updated_agent_location.second = agent_location.second;
+    Actuator::set_bump(true);
   }else{
     updated_agent_location.first = agent_location.first;
     updated_agent_location.second = agent_location.second - 1;
@@ -79,6 +102,7 @@ void Actuator::move_right()
     // if agent location is in the right edge
     updated_agent_location.first = agent_location.first;
     updated_agent_location.second = agent_location.second;
+    Actuator::set_bump(true);
   }else{
     updated_agent_location.first = agent_location.first;
     updated_agent_location.second = agent_location.second + 1;
@@ -94,6 +118,7 @@ void Actuator::move_down()
     // if agent location is in the bottom edge
     updated_agent_location.first = agent_location.first;
     updated_agent_location.second = agent_location.second;
+    Actuator::set_bump(true);
   }else{
     updated_agent_location.first = agent_location.first - 1;
     updated_agent_location.second = agent_location.second;
@@ -109,6 +134,7 @@ void Actuator::move_top()
     // if agent location is in the left edge
     updated_agent_location.first = agent_location.first;
     updated_agent_location.second = agent_location.second;
+    Actuator::set_bump(true);
   }else{
     updated_agent_location.first = agent_location.first + 1;
     updated_agent_location.second = agent_location.second;
@@ -188,6 +214,7 @@ void Actuator::shoot(){
   if(has_arrow){
     if(is_wumpus_in_line_sight(wumpus_location)){
       World::remove_wumpus();
+      Actuator::set_scream(true);
     }
   }
 }
@@ -198,7 +225,9 @@ void Actuator::kill_agent()
   pair<int, int> agent_location = Actuator::get_agent_location();
   pair<int, int> wumpus_location = World::get_wumpus_location();
   vector<pair<int, int>> pit_locations = World::get_pit_location();
-  if(agent_location == wumpus_location || agent_location == pit_locations){
+  // check if agent location and wumpus location are the same.
+  // and check if agent_location is in pit_locations vector
+  if(agent_location == wumpus_location || find(pit_locations.begin(), pit_locations.end(), agent_location) != pit_locations.end()){
     Agent::set_alive(false);
   }
 }

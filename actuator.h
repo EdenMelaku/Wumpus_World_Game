@@ -1,4 +1,5 @@
 #include "World.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -7,6 +8,8 @@ class Actuator
 private:
   pair<int, int> agent_location;
   string agent_direction;
+  bool scream;
+  bool bump;
 
 public:
   // the class constructor
@@ -19,6 +22,14 @@ public:
   // getter and setter for agent_direction attrubute
   string get_agent_direction();
   void set_agent_direction(string agent_direction);
+
+  // getter and setter for scream attribute
+  bool get_scream();
+  void set_scream(bool scream);
+
+  // getter and setter for bump attribute
+  bool get_bump();
+  void set_bump(bool bump);
 
   // turn left or right from current agent direction
   string turn_left();
