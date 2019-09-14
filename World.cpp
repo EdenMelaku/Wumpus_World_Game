@@ -167,6 +167,26 @@ bool is_valid_position(int i, int j)
 }
 //checks if there is a way between the agent position(0,0) and the gold at
 bool check_percolaton(int agent_pos, int gold_position);
+// get specifice room sense informations
+vector<bool> World::get_room_senses(pair<int, int> room_location)
+{
+  vector<bool> senses;
+  Room room = World::boxes[room_location.first][room_location.second];
+
+  bool has_stench = room.has_stench();
+  bool has_breeze = room.has_breeze();
+  bool has_glitter = room.has_glitter();
+  bool scream = Actuator::get_scream();
+  bool bump = Actuator::get_bump();
+
+  senses.push_back(has_stench);
+  senses.push_back(has_breeze);
+  senses.push_back(has_glitter);
+  senses.push_back(scream);
+  senses.push_back(bump);
+
+  return senses;
+}
 //converts 1d position to 2d
 vector<int> World::convert_to_2d(int position)
 {

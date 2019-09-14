@@ -41,6 +41,8 @@ public:
     bool is_valid_position(int i, int j);
     //checks if there is a way between the agent position(0,0) and the gold at
     bool check_percolaton(int agent_pos, int gold_position);
+    // get sense informations of a given room.
+    vector<bool> get_room_senses(pair<int, int> room_location);
     //converts 1d position to 2d
     vector<int> convert_to_2d(int position);
     //converts 2d position to 1d
