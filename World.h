@@ -16,10 +16,9 @@ class World
 {
 private:
 
-    Room boxes[16];
+    Room boxes[4][4];
     int row = 4;
     int column = 4;
-    Room grid[row][column];
     //records current position of the player
     int static pos;
     bool is_wumpus_dead;
@@ -35,6 +34,7 @@ public:
     //initializes an empty box with no position information
     // getter and setter for wumpus_location attribute
     pair<int, int> get_wumpus_location();
+    pair<int, int> World::get_wumpus_location();
     void set_wumpus_location(pair<int, int> wumpus_location);
 
     // getter and setter for pit_locations attribute
@@ -62,5 +62,9 @@ public:
     bool is_valid_position(int i, int j);
     //checks if there is a way between the agent position(0,0) and the gold at
     bool check_percolaton(int agent_pos, int gold_position);
+    int World::convert_vector_to_1d(vector<int> pos);
+    int World::convert_to_1d(int pos[]);
+    vector<int> World::convert_to_2d(int position);
+
 };
 #endif
