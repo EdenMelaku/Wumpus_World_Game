@@ -8,21 +8,22 @@ using namespace std;
 
 enum class Occupant
 {
-    wumpus = 1,
+    empty = 0,
+    wumpus,
     pit,
     gold
 };
 class Room
 {
-public:
+    public:
         Room(int row, int column);
         pair<int, int> getLocation();
-        void make_breeze();
-        bool has_breeze();
-        void make_stench();
-        bool has_stench();
-        void make_glitter();
-        bool has_glitter();
+        bool get_breeze();
+        void set_breeze(bool value);
+        bool get_stench();
+        void set_stench(bool value);
+        bool get_glitter();
+        void set_glitter(bool value);
         void set_occupant(Occupant occupant);
         bool has_wumpus();
         bool has_pit();
