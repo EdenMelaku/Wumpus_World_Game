@@ -1,6 +1,8 @@
 #include "Room.h"
 
-
+Room::Room(){
+    ;
+}
 Room::Room(int row, int column)
 {
     location = make_pair(row, column);

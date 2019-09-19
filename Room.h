@@ -16,6 +16,7 @@ enum class Occupant
 class Room
 {
     public:
+        Room();
         Room(int row, int column);
         pair<int, int> getLocation();
         bool get_breeze();
