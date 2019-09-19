@@ -1,4 +1,5 @@
 #include "actuator.h"
+#include "play_Ground.h"
 
 Actuator::Actuator(pair<int, int> agent_location, string agent_direction)
 {
@@ -184,11 +185,12 @@ bool Actuator::is_wumpus_in_line_sight(pair<int, int> wumpus_location){
 // shoot on the wumpus if it is been founded
 void Actuator::shoot(){
   pair<int, int> wumpus_location = World::get_wumpus_location();
-  bool has_arrow = Agent::get_has_arrow();
+  bool has_arrow = play_Ground::arrow=1;
   if(has_arrow){
     if(is_wumpus_in_line_sight(wumpus_location)){
-      World::remove_wumpus();
+      World::remove_wumpus(); 
     }
+    play_Ground::arrow--;
   }
 }
 
