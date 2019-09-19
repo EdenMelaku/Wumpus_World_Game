@@ -215,13 +215,14 @@ bool Actuator::is_game_over()
     return false;
   }
 }
+/**
 int main(int argc, char const *argv[]) {
-  cout << "this is simple test on the actuaror class\n";
+  //cout << "this is simple test on the actuaror class\n";
   pair<int, int> agent_location = make_pair(1, 1);
   string agent_direction = "right";
   Actuator actuator = Actuator(agent_location, agent_direction);
-  cout << "starting agent direction " << agent_direction << endl;
-  cout << "starting agent_location (" << agent_location.first <<", " << agent_location.second <<")" << endl;
+  //cout << "starting agent direction " << agent_direction << endl;
+  //cout << "starting agent_location (" << agent_location.first <<", " << agent_location.second <<")" << endl;
   string updated_agent_direction = actuator.turn_left();
   pair<int, int> updated_agent_location = actuator.move_forward();
   cout << "---------------------------------------------------" << endl;
@@ -229,3 +230,4 @@ int main(int argc, char const *argv[]) {
   cout << "updated agent_location (" << updated_agent_location.first <<", " << updated_agent_location.second <<")" << endl;
   return 0;
 }
+*/
