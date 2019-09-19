@@ -33,10 +33,11 @@ void World::init_empty_world()
             boxes[i][j] = common;
         }
     }
+}
     // getter and setter for wumpus_location attribute
     pair<int, int> World::get_wumpus_location()
     {
-        return World::wumpus_location;
+        return wumpus_location;
     }
     void World::set_wumpus_location(pair<int, int> wumpus_location)
     {
@@ -44,11 +45,11 @@ void World::init_empty_world()
     }
 
     // getter and setter for pit_locations attribute
-    vector<pair<int, int>> World::get_pit_locations()
+    vector<pair<int, int> > World::get_pit_locations()
     {
         return World::pit_locations;
     }
-    void World::set_pit_locations(vector<pair<int, int>> pit_locations)
+    void World::set_pit_locations(vector<pair<int, int> > pit_locations)
     {
         World::pit_locations = pit_locations;
     }
@@ -66,64 +67,63 @@ void World::init_empty_world()
     //generates random positions along with sensor information
     void World::generate_position()
     {
-        srand((int)time(0));
-        int iter = 3;
-        set<vector<int>> valuess;        // a set of position for storing wumpus, pit , gold
-        
-        vector<int> agentPosition;      // to hold the agent position
-        vector<int> restrictedPosition; //to hold the restricted position adjcent to the agent
-        
-        agentPosition.push_back(0);
-        agentPosition.push_back(0);
-        valuess.insert(agentPosition);
-        restrictedPosition.push_back(1);
-        restrictedPosition.push_back(0);
-        valuess.insert(restrictedPosition);
-        vector<int> restrictedPosition2;
-        restrictedPosition2.push_back(0);
-        restrictedPosition2.push_back(1);
-        valuess.insert(restrictedPosition2);
+       
+    srand((int)time(0));
+    int iter = 3;
+    set<vector<int> > store;        // a set of position for storing wumpus, pit , gold
+    vector<int> agentPosition;      // to hold the agent position
+    vector<int> restrictedPosition; //to hold the restricted position adjcent to the agent
+    agentPosition.push_back(0);
+    agentPosition.push_back(0);
+    store.insert(agentPosition);
+    restrictedPosition.push_back(1);
+    restrictedPosition.push_back(0);
+    store.insert(restrictedPosition);
+    vector<int> restrictedPosition2;
+    restrictedPosition2.push_back(0);
+    restrictedPosition2.push_back(1);
+    store.insert(restrictedPosition2);
 
-        vector<int> roomm;
-        int j = 0;
-        while (valuess.size() < 10)
+    vector<int> rooms;
+    int j = 0;
+    while (store.size() < 10)
+    {
+        for (int i = 0; i < iter; ++i)
         {
-            for (int i = 0; i < iter; ++i)
-            {
 
-                rand() % 15;
-            }
-            roomm.push_back(rand() % 4);
-            roomm.push_back(rand() % 4);
-            valuess.insert(roomm);
+            rand() % 15;
         }
+        rooms.push_back(rand() % 4);
+        rooms.push_back(rand() % 4);
+        store.insert(rooms);
+    }
 
-        valuess.erase(valuess.find(agentPosition));
-        valuess.erase(valuess.find(restrictedPosition2));
-        valuess.erase(valuess.find(restrictedPosition));
-        set<vector<int>>::iterator it = valuess.begin();
-        ++it;
-        vector<int> wump = *it; //random position for wumpus
-        ++it;
-        vector<int> gol = *it; //random position for gold
-        ++it;
-        vector<int> pit1 = *it; //random position for pit
-        ++it;
-        vector<int> pit2 = *it; //random position for pit
-        ++it;
-        vector<int> pit3 = *it; //random position for pit
+    store.erase(store.find(agentPosition));
+    store.erase(store.find(restrictedPosition2));
+    store.erase(store.find(restrictedPosition));
+    set<vector<int>>::iterator it = store.begin();
+    ++it;
+    vector<int> wumpus = *it; //random position for wumpus
+    ++it;
+    vector<int> gold = *it; //random position for gold
+    ++it;
+    vector<int> pit1 = *it; //random position for pit
+    ++it;
+    vector<int> pit2 = *it; //random position for pit
+    ++it;
+    vector<int> pit3 = *it; //random position for pit
 
-        //now lets map this positions into our rooms in the boxes
+    //now lets map this positions into our rooms in the boxes
 
-        //1- ASSIGNING WUMPUS
-        create_wumpus(wump);
-        //2- ASSIGNING pit
-        create_pit(pit1);
-        create_pit(pit2);
-        create_pit(pit3);
+    //1- ASSIGNING WUMPUS
+    create_wumpus(wumpus);
+    //2- ASSIGNING pit
+    create_pit(pit1);
+    create_pit(pit2);
+    create_pit(pit3);
 
-        //3- ASSIGNING gold
-        create_gold(gold);
+    //3- ASSIGNING gold
+    create_gold(gold);
     }
     //creates a wumpus room at position and initialize a stench in adjacent rooms
     void World::create_wumpus(vector<int> wumpus)
@@ -131,15 +131,16 @@ void World::init_empty_world()
         int pos[] = {wumpus.at(0), wumpus.at(1)};
         int point = convert_to_1d(pos);
         //create the wumpus
-        boxes[point].set_wumpus(true);
+        Occupant wumpu=Occupant::wumpus;
+        boxes[pos[0]][pos[1]].set_occupant(wumpu);
 
         //initialize  stench on adjacent nodes
 
         //gets adjacent nodes
         vector<int> adjacents = get_adjacent_rooms(point);
         for (int i = 0; i < adjacents.size(); i++)
-        {
-            boxes[adjacents.at(i)].set_stench(true);
+        {   int pos[] = {adjacents.at(0), adjacents.at(1)};
+            boxes[pos[0]][pos[1]].make_stench();
         }
     }
     //creates a pit room at position and initialize a breez in adjacent rooms
@@ -149,7 +150,7 @@ void World::init_empty_world()
         int pos[] = {pit.at(0), pit.at(1)};
         int point = convert_to_1d(pos);
         //create the pit
-        boxes[point].set_pit(true);
+        boxespos[0]][pos[1]].set_pit(true);
 
         //initialize breez on adjacent nodes
 

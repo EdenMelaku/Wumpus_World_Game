@@ -26,7 +26,7 @@ private:
     bool is_gold_found;
 
     pair<int, int> wumpus_location;
-    vector<pair<int, int>> pit_locations;
+    vector<pair<int, int> > pit_locations;
     pair<int, int> gold_location;
 
 public:
@@ -34,12 +34,12 @@ public:
     //initializes an empty box with no position information
     // getter and setter for wumpus_location attribute
     pair<int, int> get_wumpus_location();
-    pair<int, int> World::get_wumpus_location();
+    
     void set_wumpus_location(pair<int, int> wumpus_location);
 
     // getter and setter for pit_locations attribute
     vector<pair<int, int>> get_pit_locations();
-    void set_pit_locations(vector<pair<int, int>> pit_locations);
+    void set_pit_locations(vector<pair<int, int> > pit_locations);
 
     // getter and setter for gold_location attribute
     pair<int, int> get_gold_location();
@@ -62,8 +62,8 @@ public:
     bool is_valid_position(int i, int j);
     //checks if there is a way between the agent position(0,0) and the gold at
     bool check_percolaton(int agent_pos, int gold_position);
-    int World::convert_vector_to_1d(vector<int> pos);
-    int World::convert_to_1d(int pos[]);
+    int convert_vector_to_1d(vector<int> pos);
+    int convert_to_1d(int pos[]);
     vector<int> World::convert_to_2d(int position);
 
 };
