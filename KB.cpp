@@ -1,19 +1,19 @@
 #include "KB.h"
 
 
-map<int, set<Percepts>> KnowledgeBase::get_knowledgebase()
+map<pair<int,int>, Knowledge> KnowledgeBase::get_knowledgebase()
 {
     return knowledgebase;
 }
-void KnowledgeBase::add_into_knowledgebase(int room, set<Percepts> perceptions)
+void KnowledgeBase::add_into_knowledgebase(pair<int,int> room, Knowledge knowledge)
 {
-    knowledgebase[room] = perceptions;
+    knowledgebase[room] = knowledge;
 }
-void KnowledgeBase::change_percepts(int room, set<Percepts> perceptions)
+void KnowledgeBase::change_percepts(pair<int, int> room, Knowledge knowledge)
 {
-    knowledgebase[room] = perceptions;
+    knowledgebase[room] = knowledge;
 }
-set<Percepts> KnowledgeBase::get_percepts(int room)
+Knowledge KnowledgeBase::get_percepts(pair<int, int> room)
 {
     return knowledgebase[room];
 }
