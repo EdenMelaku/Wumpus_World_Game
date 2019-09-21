@@ -13,8 +13,8 @@ this is a wumpus world Environment implementation code .
 #include "World.h"
 using namespace std;
 
-World::World()
-{
+World::World(int size)
+{   size=size;
     init_empty_world();
     generate_position();
     World::pos = 0;
@@ -23,12 +23,9 @@ World::World()
 //initializes an empty box with no position information
 void World::init_empty_world()
 {
-    int count = 4;
-    for (int i = 0; i < count; i++)
-    {
-        for (int j = 0; j < count; j++)
-        {
-
+    int count = size;
+    for (int i = 0; i < count; i++){
+        for (int j = 0; j < count; j++){
             Room common = Room(i, j);
             boxes[i][j] = common;
         }
@@ -67,7 +64,6 @@ void World::set_gold_location(pair<int, int> gold_location)
 //generates random positions along with sensor information
 void World::generate_position()
 {
-
     srand((int)time(0));
     int iter = 3;
     set<vector<int>> store;         // a set of position for storing wumpus, pit , gold
@@ -86,15 +82,10 @@ void World::generate_position()
 
     vector<int> rooms;
     int j = 0;
-    while (store.size() < 10)
-    {
-        for (int i = 0; i < iter; ++i)
-        {
-
-            rand() % 15;
-        }
-        rooms.push_back(rand() % 4);
-        rooms.push_back(rand() % 4);
+    while (store.size() < 10) {
+        for (int i = 0; i < iter; ++i) { rand() % 15; }
+        rooms.push_back(rand() % size);
+        rooms.push_back(rand() % size);
         store.insert(rooms);
     }
 
@@ -198,34 +189,31 @@ vector<int> World::get_adjacent_rooms(int positon)
     return adjacents;
 }
 //validates is a position is valid or not if not valid then bump
-bool is_valid_position(int i, int j)
+bool World::is_valid_position(int i, int j)
 {
-    if (i >= 0 && j >= 0 && i <= 3 && j <= 3)
-    {
-        return true;
-    }
-    return false;
+    return (i >= 0 && j >= 0 && i <= size && j <= size);
+   
 }
 //checks if there is a way between the agent position(0,0) and the gold at
 bool check_percolaton(int agent_pos, int gold_position);
 //converts 1d position to 2d
 vector<int> World::convert_to_2d(int position)
 {
-    int i = position % 4;
-    int j = position / 4;
+    int i = position % size;
+    int j = position / size;
     vector<int> arr = {i, j};
     return arr;
 }
 //converts 2d position to 1d
 int World::convert_to_1d(int pos[])
 {
-    int position = pos[0] + (pos[1] * 4);
+    int position = pos[0] + (pos[1] * size);
     return position;
 }
 
 //converts 2d position to 1d
 int World::convert_vector_to_1d(vector<int> pos)
 {
-    int position = pos[0] + (pos[1] * 4);
+    int position = pos[0] + (pos[1] * size);
     return position;
 }

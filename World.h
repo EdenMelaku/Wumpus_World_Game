@@ -15,31 +15,29 @@ using namespace std;
 class World
 {
 private:
-
-    Room boxes[4][4];
-    int row = 4;
-    int column = 4;
+    vector<vector<Room>> boxes;
+    int size;
     //records current position of the player
-    int static pos;
+    int pos;
     bool is_wumpus_dead;
     bool is_agent_dead;
     bool is_gold_found;
 
     pair<int, int> wumpus_location;
-    vector<pair<int, int> > pit_locations;
+    vector<pair<int, int>> pit_locations;
     pair<int, int> gold_location;
 
 public:
-    World();
+    World::World(int size);
     //initializes an empty box with no position information
     // getter and setter for wumpus_location attribute
     pair<int, int> get_wumpus_location();
-    
+
     void set_wumpus_location(pair<int, int> wumpus_location);
 
     // getter and setter for pit_locations attribute
     vector<pair<int, int>> get_pit_locations();
-    void set_pit_locations(vector<pair<int, int> > pit_locations);
+    void set_pit_locations(vector<pair<int, int>> pit_locations);
 
     // getter and setter for gold_location attribute
     pair<int, int> get_gold_location();
@@ -65,6 +63,5 @@ public:
     int convert_vector_to_1d(vector<int> pos);
     int convert_to_1d(int pos[]);
     vector<int> World::convert_to_2d(int position);
-
 };
 #endif
