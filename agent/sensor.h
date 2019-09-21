@@ -20,13 +20,13 @@ class Sensor
 public:
     Sensor();
     Sensor(pair<int, int> location, Type type);
-    
-        pair<int, int> get_Location();
 
-    private:
-        pair<int, int> location;
-        Type sense;
-        Type get_type();
-    };
+    pair<int, int> get_Location();
+    Type get_type();
+
+private:
+    pair<int, int> location;
+    Type sense;
+};
 
 #endif;

@@ -13,7 +13,7 @@ Sensor::Sensor( pair<int, int> location, Type type){
 pair<int, int> Sensor::get_Location(){
     return location;
 }
-
+                    
 Type Sensor::get_type(){
     return sense;
 }
