@@ -3,36 +3,34 @@
 Inference::Inference(KnowledgeBase Knowledge_base)
 {
   Inference::knowledge_base = knowledge_base;
+  Inference::knowledge = knowledge_base.get_knowledgebase();
+}
+
+//validates is a position is valid or not if not valid then bump
+bool Inference::is_valid_position(int i, int j)
+{
+  if((i >= 1 && i <= 4) && (j >= 1 && j <= 4)) {
+    return true;
+  }
+  return false;
 }
 
 vector<pair<int, int>> Inference::get_adjacent_rooms(pair<int, int> current_room)
 {
   vector<pair<int, int>> adjacent_rooms;
+  vector<pair<int, int>> adjacent_rooms_candidates;
+  adjacent_rooms_candidates.push_back(make_pair(current_room.first + 1, current_room.second));
+  adjacent_rooms_candidates.push_back(make_pair(current_room.first - 1, current_room.second));
+  adjacent_rooms_candidates.push_back(make_pair(current_room.first, current_room.second + 1));
+  adjacent_rooms_candidates.push_back(make_pair(current_room.first, current_room.second - 1));
+
+  for(auto itr = adjacent_rooms_candidates.begin(); itr < adjacent_rooms_candidates.end(); itr++) {
+    if(is_valid_position(itr->first, itr->second)) {
+      adjacent_rooms.push_back(*itr);
+    }
+  }
+
   return adjacent_rooms;
-}
-
-vector<pair<int, int>> Inference::get_adjacent_ok_rooms(pair<int, int> current_room)
-{
-  vector<pair<int, int>> adjacent_rooms = get_adjacent_rooms(current_room);
-  vector<pair<int, int>> adjacent_ok_rooms;
-  for(auto itr = adjacent_rooms.begin(); itr < adjacent_rooms.end(); itr++){
-    if(knowledge_base.find(*itr).ok){
-      adjacent_ok_rooms.push_back(*itr);
-    }
-  }
-  return adjacent_ok_rooms;
-}
-
-vector<pair<int, int>> Inference::get_adjacent_visited_rooms(pair<int, int> current_room)
-{
-  vector<pair<int, int>> adjacent_rooms = get_adjacent_rooms(current_room);
-  vector<pair<int, int>> adjacent_visited_rooms;
-  for(auto itr = adjacent_rooms.begin(); itr < adjacent_rooms.end(); itr++){
-    if(knowledgebase.find(*itr).visited){
-      adjacent_visited_rooms.push_back(*itr);
-    }
-  }
-  return adjacent_visited_rooms;
 }
 
 void Inference::inference(pair<int, int> current_room)
