@@ -32,5 +32,4 @@ public:
   pair<int, int> find_possible_move(pair<int, int> current_room);
   Response inference(pair<int, int> current_room);
 };
-
 #endif;
