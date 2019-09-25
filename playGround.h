@@ -10,6 +10,8 @@ creating a playable environment is the main task of this module
 #include <string>
 #include <vector>
 #include "Room.h"
+#include "agent/sensor.h"
+#include "actions.h"
 using namespace std;
 
 class PlayGround
@@ -31,7 +33,7 @@ public:
     //checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,
     // can be called after every action(move, shoot)
     bool is_game_over() {}
-    //kills the agent
+    vector<Sensor> infer(actions ac);
    
 };
 #endif
