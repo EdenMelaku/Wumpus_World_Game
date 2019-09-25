@@ -13,7 +13,9 @@ Sensor::Sensor( pair<int, int> location, Type type){
 pair<int, int> Sensor::get_Location(){
     return location;
 }
-                    
+void Sensor::setType(Type type) {
+sense=type;
+}
 Type Sensor::get_type(){
     return sense;
 }

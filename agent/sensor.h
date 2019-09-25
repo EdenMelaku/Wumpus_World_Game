@@ -12,8 +12,9 @@ enum class Type
     B,
     S,
     v,
-    G,
-    OK
+
+    OK,
+    scream
 };
 class Sensor
 {
@@ -23,6 +24,7 @@ public:
 
     pair<int, int> get_Location();
     Type get_type();
+    void setType(Type type);
 
 private:
     pair<int, int> location;
