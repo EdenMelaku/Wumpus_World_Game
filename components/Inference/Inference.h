@@ -6,22 +6,33 @@
 #include <vector>
 #include "KB.h"
 
+using namespace std;
 
-namespace components{
+struct Response{
+  pair<int, int> move_to;
+  pair<int, int> shoot_at;
+  map<pair<int, int>, Knowledge> updated_knowledge;
+};
 
 class Inference
 {
-    private:
-        KnowledgeBase current_kb;
-    public:
-        Inference();
-        ~Inference();
-        std::vector<std::pair<int,int>> get_adjacent_rooms(std::pair<int, int> room);
-        bool infer_wumpus();
-        bool infer_pit();
-        bool infer_ok();
-        bool infer_gold();
-};
+  /*
+  *
+  * This class use to infer possible action to be performed by the agent.
+  * and it also updated the knowledgebase with the new knowledge it find.
+  *
+  */
+  private:
+    vector<pair<int, int >> adjacent_rooms;
+    pair<int, int> wumpus_room;
+    KnowledgeBase knowledge_base; // knowledge base object
+    map<pair<int, int>, Knowledge> knowledge; // the actual rooms knowledge base
 
-} 
-#endif;
+  public:
+    Inference(KnowledgeBase Knowledge_base);
+    bool is_valid_position(int i, int j);
+    vector<pair<int, int>> get_adjacent_rooms(pair<int, int> current_room);
+    pair<int, int> find_possible_move(pair<int, int> current_room);
+    Response inference(pair<int, int> current_room);
+};
+#endif
