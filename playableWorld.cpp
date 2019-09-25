@@ -1,5 +1,4 @@
 #include "playableWorld.h"
-#include "playGround.h"
 
 playableWorld::playableWorld(pair<int, int> agent_location, string agent_direction)
 {
@@ -183,9 +182,9 @@ bool playableWorld::is_wumpus_in_line_sight(pair<int, int> wumpus_location){
 }
 
 // shoot on the wumpus if it is been founded
-void playableWorld::shoot(){
+void playableWorld::shoot( ){
   pair<int, int> wumpus_location = World::get_wumpus_location();
-  bool has_arrow = play_Ground::arrow=1;
+ // bool has_arrow = play_Ground::arrow=1;
   if(has_arrow){
     if(is_wumpus_in_line_sight(wumpus_location)){
       World::remove_wumpus(); 
