@@ -1,31 +1,31 @@
-#include "actuator.h"
+#include "playableWorld.h"
 
-Actuator::Actuator(pair<int, int> agent_location, string agent_direction)
+playableWorld::playableWorld(pair<int, int> agent_location, string agent_direction)
 {
-  Actuator::agent_location = agent_location;
-  Actuator::agent_direction = agent_direction;
+  playableWorld::agent_location = agent_location;
+  playableWorld::agent_direction = agent_direction;
 }
 
-pair<int, int> Actuator::get_agent_location()
+pair<int, int> playableWorld::get_agent_location()
 {
-  return Actuator::agent_location;
+  return playableWorld::agent_location;
 }
 
-void Actuator::set_agent_location(pair<int, int> agent_location)
+void playableWorld::set_agent_location(pair<int, int> agent_location)
 {
-  Actuator::agent_location = agent_location;
+  playableWorld::agent_location = agent_location;
 }
 
-string Actuator::get_agent_direction(){
-  return Actuator::agent_direction;
+string playableWorld::get_agent_direction(){
+  return playableWorld::agent_direction;
 }
 
-void Actuator::set_agent_direction(string agent_direction)
+void playableWorld::set_agent_direction(string agent_direction)
 {
-  Actuator::agent_direction = agent_direction;
+  playableWorld::agent_direction = agent_direction;
 }
 
-string Actuator::turn_left()
+string playableWorld::turn_left()
 {
   string agent_direction = get_agent_direction();
   if( agent_direction == "top" ){
@@ -40,7 +40,7 @@ string Actuator::turn_left()
   return get_agent_direction();
 }
 
-string Actuator::turn_right()
+string playableWorld::turn_right()
 {
   string agent_direction = get_agent_direction();
   if( agent_direction == "top" ){
@@ -56,7 +56,7 @@ string Actuator::turn_right()
 }
 
 // move left, right, top, bottom
-void Actuator::move_left()
+void playableWorld::move_left()
 {
   pair<int, int> agent_location = get_agent_location();
   pair<int, int> updated_agent_location;
@@ -71,7 +71,7 @@ void Actuator::move_left()
   set_agent_location(updated_agent_location);
 }
 
-void Actuator::move_right()
+void playableWorld::move_right()
 {
   pair<int, int> agent_location = get_agent_location();
   pair<int, int> updated_agent_location;
@@ -86,7 +86,7 @@ void Actuator::move_right()
   set_agent_location(updated_agent_location);
 }
 
-void Actuator::move_down()
+void playableWorld::move_down()
 {
   pair<int, int> agent_location = get_agent_location();
   pair<int, int> updated_agent_location;
@@ -101,7 +101,7 @@ void Actuator::move_down()
   set_agent_location(updated_agent_location);
 }
 
-void Actuator::move_top()
+void playableWorld::move_top()
 {
   pair<int, int> agent_location = get_agent_location();
   pair<int, int> updated_agent_location;
@@ -117,7 +117,7 @@ void Actuator::move_top()
 }
 
 // move forward or backward
-pair<int, int> Actuator::move_forward()
+pair<int, int> playableWorld::move_forward()
 {
   string agent_direction = get_agent_direction();
   if( agent_direction == "left" ){
@@ -132,7 +132,7 @@ pair<int, int> Actuator::move_forward()
   return get_agent_location();
 }
 
-pair<int, int> Actuator::move_backward()
+pair<int, int> playableWorld::move_backward()
 {
   string agent_direction = get_agent_direction();
   if( agent_direction == "left" ){
@@ -147,7 +147,7 @@ pair<int, int> Actuator::move_backward()
   return get_agent_location();
 }
 
-bool Actuator::is_wumpus_in_line_sight(pair<int, int> wumpus_location){
+bool playableWorld::is_wumpus_in_line_sight(pair<int, int> wumpus_location){
   pair<int, int> agent_location = get_agent_location();
   string agent_direction = get_agent_direction();
   if(agent_direction == "left"){
@@ -182,20 +182,21 @@ bool Actuator::is_wumpus_in_line_sight(pair<int, int> wumpus_location){
 }
 
 // shoot on the wumpus if it is been founded
-void Actuator::shoot(){
+void playableWorld::shoot( ){
   pair<int, int> wumpus_location = World::get_wumpus_location();
-  bool has_arrow = Agent::get_has_arrow();
+ // bool has_arrow = play_Ground::arrow=1;
   if(has_arrow){
     if(is_wumpus_in_line_sight(wumpus_location)){
-      World::remove_wumpus();
+      World::remove_wumpus(); 
     }
+    play_Ground::arrow--;
   }
 }
 
 //kills the agent
-void Actuator::kill_agent()
+void playableWorld::kill_agent()
 {
-  pair<int, int> agent_location = Actuator::get_agent_location();
+  pair<int, int> agent_location = playableWorld::get_agent_location();
   pair<int, int> wumpus_location = World::get_wumpus_location();
   vector<pair<int, int>> pit_locations = World::get_pit_location();
   if(agent_location == wumpus_location || agent_location == pit_locations){
@@ -205,7 +206,7 @@ void Actuator::kill_agent()
 
 //checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,
 // can be called after every action(move, shoot)
-bool Actuator::is_game_over()
+bool playableWorld::is_game_over()
 {
   if(!Agent::get_alive()){
     return true;
@@ -215,17 +216,19 @@ bool Actuator::is_game_over()
     return false;
   }
 }
+/**
 int main(int argc, char const *argv[]) {
-  cout << "this is simple test on the actuaror class\n";
+  //cout << "this is simple test on the actuaror class\n";
   pair<int, int> agent_location = make_pair(1, 1);
   string agent_direction = "right";
-  Actuator actuator = Actuator(agent_location, agent_direction);
-  cout << "starting agent direction " << agent_direction << endl;
-  cout << "starting agent_location (" << agent_location.first <<", " << agent_location.second <<")" << endl;
-  string updated_agent_direction = actuator.turn_left();
-  pair<int, int> updated_agent_location = actuator.move_forward();
+  playableWorld playableWorld = playableWorld(agent_location, agent_direction);
+  //cout << "starting agent direction " << agent_direction << endl;
+  //cout << "starting agent_location (" << agent_location.first <<", " << agent_location.second <<")" << endl;
+  string updated_agent_direction = playableWorld.turn_left();
+  pair<int, int> updated_agent_location = playableWorld.move_forward();
   cout << "---------------------------------------------------" << endl;
   cout << "updated agent direction " << updated_agent_direction << endl;
   cout << "updated agent_location (" << updated_agent_location.first <<", " << updated_agent_location.second <<")" << endl;
   return 0;
 }
+*/

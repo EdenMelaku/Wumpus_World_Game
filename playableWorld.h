@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class Actuator
+class playableWorld
 {
 private:
   pair<int, int> agent_location;
@@ -10,7 +10,7 @@ private:
 
 public:
   // the class constructor
-  Actuator(pair<int, int> agent_location, string agent_direction);
+  playableWorld(pair<int, int> agent_location, string agent_direction);
 
   // getter and setter for agent_location attribute
   pair<int, int> get_agent_location();

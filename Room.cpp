@@ -1,6 +1,8 @@
 #include "Room.h"
 
-
+Room::Room(){
+    ;
+}
 Room::Room(int row, int column)
 {
     location = make_pair(row, column);
@@ -9,27 +11,27 @@ pair<int, int> Room::getLocation()
 {
     return location;
 }
-void Room::make_breeze()
+void Room::set_breeze(bool value)
 {
-    breeze = true;
+    breeze = value;
 }
-bool Room::has_breeze()
+bool Room::get_breeze()
 {
     return breeze;
 }
-void Room::make_stench()
+void Room::set_stench(bool value)
 {
-    stench = true;
+    stench = value;
 }
-bool Room::has_stench()
+bool Room::get_stench()
 {
     return stench;
 }
-void Room::make_glitter()
+void Room::set_glitter(bool value)
 {
-    glitter = true;
+    glitter = value;
 }
-bool Room::has_glitter()
+bool Room::get_glitter()
 {
     return glitter;
 }
