@@ -18,10 +18,13 @@ bool is_game_over()
 {
     ;
 }
-PlayGround::PlayGround(string player, World world)
+PlayGround::PlayGround(){
+    ;
+}
+PlayGround::PlayGround(string playern, World worldn)
 {
-    world = world;
-    player = player;
+    world = worldn;
+    player = playern;
 }
 //kills the agent
 /*
