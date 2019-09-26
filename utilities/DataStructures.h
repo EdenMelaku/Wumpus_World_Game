@@ -1,3 +1,5 @@
+#ifndef DS_H
+#define DS_H
 
 
 namespace DataStructures{
@@ -28,4 +30,11 @@ namespace DataStructures{
         bool wumpus = false;
     };
     
+    enum class Decision{
+        move_left,
+        move_right,
+        move_up
+    };
+    
 }
+#endif;

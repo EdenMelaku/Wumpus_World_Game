@@ -3,6 +3,25 @@
 
 namespace components{
 
+using namespace DataStructures;
+
+    /**
+     * @brief Construct a new Inference:: Inference object
+     * 
+     * @param kb        Knowledgebase object that will be used to infer
+     */
+    Inference::Inference(KnowledgeBase kb)
+    {
+        current_kb = kb;
+    }
+    Decision Inference::infer()
+    {
+        Decision decision;
+        
+        //todo
+
+        return decision;
+    }
     /**
      * @brief Get adjacent rooms available in the knowledge base
      * 
