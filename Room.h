@@ -1,6 +1,5 @@
 #ifndef ROOM_H
 #define ROOM_H
-
 #include <tuple>
 
 
@@ -38,4 +37,4 @@ class Room
         bool glitter;
 };
 
-#endif;
+#endif
