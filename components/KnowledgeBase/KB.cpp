@@ -3,6 +3,8 @@
 
 namespace components{
 
+using namespace DataStructures; 
+
     /**
      * @brief Get knowledgebase data structure
      * 
