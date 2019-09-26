@@ -28,7 +28,8 @@ private:
     pair<int, int> gold_location;
 
 public:
-    World::World(int size);
+    World();
+    World(int size);
     //initializes an empty box with no position information
     // getter and setter for wumpus_location attribute
     pair<int, int> get_wumpus_location();

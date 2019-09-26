@@ -12,7 +12,9 @@ this is a wumpus world Environment implementation code .
 #include "Room.h"
 #include "World.h"
 using namespace std;
-
+World::World(){
+    ;
+}
 World::World(int size)
 {   size=size;
     init_empty_world();
