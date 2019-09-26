@@ -12,6 +12,7 @@ creating a playable environment is the main task of this module
 #include "Room.h"
 #include "agent/sensor.h"
 #include "actions.h"
+#include "World.h"
 using namespace std;
 
 class PlayGround
@@ -21,12 +22,16 @@ private:
     bool is_agent_dead;
     bool is_gold_found;
     pair<int, int> agentLocation;
-   
+    vector<Sensor> infer(actions ac);
     //the current point of the player
     int point;
-    
-public: 
-    int arrow=1;
+
+public:
+    World world;
+    string player;
+    vector<vector<bool>> visiblity;
+    PlayGround(string player, World world);
+    int arrow = 1;
     void penalize(int value);
     void reward(int value);
 
@@ -34,6 +39,5 @@ public:
     // can be called after every action(move, shoot)
     bool is_game_over() {}
     vector<Sensor> infer(actions ac);
-   
 };
 #endif
