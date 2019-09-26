@@ -34,9 +34,11 @@ vector<Sensor> actions::run(){
     else if(turnright) { turn('right'); }
     else if(turnup) { turn('top'); }
     else if(turndown) { turn('bottom'); }
+
     if(move) { location = playableWorld::move_forward(); }
     if(shoot) { playableWorld::shoot(); }
-    Room room = World::boxes.at(dir.first).at(dir.second);
+
+    Room room = World::boxes.at(location.first).at(location.second);
     vector<Sensor> perception;
     if(room.get_breeze()) {
         Type type=Type::B;
