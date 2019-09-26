@@ -18,12 +18,12 @@ class Inference
 {
   /*
   *
-  * This class use to infer possible action to be performed by the agent.
-  * and it also updated the knowledgebase with the new knowledge it find.
+  * This class used to infer possible action to be performed by the agent.
+  * and it also updates the knowledgebase with the infered parameters
   *
   */
   private:
-    vector<pair<int, int >> adjacent_rooms;
+    vector<pair<int, int>> adjacent_rooms;
     pair<int, int> wumpus_room;
     KnowledgeBase knowledge_base; // knowledge base object
     map<pair<int, int>, Knowledge> knowledge; // the actual rooms knowledge base

@@ -5,12 +5,12 @@ Inference::Inference(KnowledgeBase Knowledge_base)
   Inference::knowledge_base = knowledge_base;
   Inference::knowledge = knowledge_base.get_knowledgebase();
 }
+
 /**
- * @brief validates if a position is valid or not.
- *
- * @param i  row of a given position.
- * @param j  column of a given position.
- * @return bool
+ * [Inference::is_valid_position validates if a given position is valid or not]
+ * @param  i [row of a given position]
+ * @param  j [column of a given position]
+ * @return   [bool]
  */
 bool Inference::is_valid_position(int i, int j)
 {
@@ -21,10 +21,9 @@ bool Inference::is_valid_position(int i, int j)
 }
 
 /**
- * @brief get valid adjacent rooms from current room.
- *
- * @param current_room: pair<int, int> current room position in tuple format.
- * @return vector<pair<int, int>> return list of adjacent rooms
+ * [Inference::get_adjacent_rooms find valid adjacent rooms of the current room]
+ * @param current_room [piar<int, int> current room position in tumple format]
+ * @return [vector<pair<int, int>> valid adjacent rooms]
  */
 vector<pair<int, int>> Inference::get_adjacent_rooms(pair<int, int> current_room)
 {
@@ -45,10 +44,9 @@ vector<pair<int, int>> Inference::get_adjacent_rooms(pair<int, int> current_room
 }
 
 /**
- * @brief calculate the possible moves
- *
- * @param current_room: pair<int, int> current room position in tuple format.
- * @return pair<int, int> return a selected room.
+ * [Inference::find_possible_move find the possible move base on the knowledgebase of the rooms.]
+ * @param current_room [current room position in pair<int, int> format]
+ * @return [selected room in pair<int, int> format]
  */
 pair<int, int> Inference::find_possible_move(pair<int, int> current_room)
 {
@@ -93,10 +91,9 @@ pair<int, int> Inference::find_possible_move(pair<int, int> current_room)
 }
 
 /**
- * @brief infere response from the given knowledgebase
- *
- * @param current_room: pair<int, int> current room position in tuple format.
- * @return response which contain infered action and updated knowledgebase.
+ * [Inference::inference infere response from the given knowledgebase]
+ * @param  current_room [current room position in pair<int, int> format]
+ * @return              [response which contain the infered action and an updated knowledgebase]
  */
 Response Inference::inference(pair<int, int> current_room)
 {
