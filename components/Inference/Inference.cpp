@@ -3,7 +3,6 @@
 Inference::Inference(KnowledgeBase Knowledge_base)
 {
   Inference::knowledge_base = knowledge_base;
-  Inference::knowledge = knowledge_base.get_knowledgebase();
 }
 
 /**
@@ -52,6 +51,7 @@ pair<int, int> Inference::find_possible_move(pair<int, int> current_room)
 {
   // todo - calculate_possible_move
   vector<pair<int, int>> adjacent_rooms = get_adjacent_rooms(current_room);
+  map<pair<int, int>, Knowledge>> knowledge = knowledge_base.get_knowledgebase();
 
   // possible move candidate base on their priorities
   vector<pair<int, int>> possible_move_candidates1;
@@ -95,9 +95,10 @@ pair<int, int> Inference::find_possible_move(pair<int, int> current_room)
  * @param  current_room [current room position in pair<int, int> format]
  * @return              [response which contain the infered action and an updated knowledgebase]
  */
-Response Inference::inference(pair<int, int> current_room)
+Response Inference::infer(pair<int, int> current_room)
 {
   Knowledge room_knowledge = knowledge_base.get_percepts(current_room);
+  map<pair<int, int>, knowledge> knowledge = knowledge_base.get_knowledgebase();
   vector<pair<int, int>> adjacent_rooms = get_adjacent_rooms(current_room);
 
   Response response;
@@ -163,7 +164,7 @@ Response Inference::inference(pair<int, int> current_room)
   knowledge[current_room].visited = true;
 
   response.move_to = selected_room;
-  response.updated_knowledge = knowledge;
+  // response.updated_knowledge = knowledge;
 
   return response;
 }

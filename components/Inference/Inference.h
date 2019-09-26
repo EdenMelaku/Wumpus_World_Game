@@ -11,7 +11,7 @@ using namespace std;
 struct Response{
   pair<int, int> move_to;
   pair<int, int> shoot_at;
-  map<pair<int, int>, Knowledge> updated_knowledge;
+  // map<pair<int, int>, Knowledge> updated_knowledge;
 };
 
 class Inference
@@ -26,7 +26,6 @@ class Inference
     vector<pair<int, int>> adjacent_rooms;
     pair<int, int> wumpus_room;
     KnowledgeBase knowledge_base; // knowledge base object
-    map<pair<int, int>, Knowledge> knowledge; // the actual rooms knowledge base
 
   public:
     Inference(KnowledgeBase Knowledge_base);
