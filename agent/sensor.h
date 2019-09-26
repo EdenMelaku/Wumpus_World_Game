@@ -11,9 +11,6 @@ enum class Type
     G,
     B,
     S,
-    v,
-
-    OK,
     scream
 };
 class Sensor
