@@ -4,7 +4,7 @@
 #include <map>
 #include <set>
 #include <vector>
-#include "KB.h"
+#include "../KnowledgeBase/KB.h"
 #include "../../utilities/DataStructures.h"
 
 
@@ -12,18 +12,24 @@ namespace components{
 
 class Inference
 {
-    private:
-        KnowledgeBase current_kb;
-    public:
-        Inference(KnowledgeBase kb);
-        ~Inference();
-        std::vector<std::pair<int,int>> get_adjacent_rooms(std::pair<int, int> room);
-        bool infer_wumpus();
-        bool infer_pit();
-        bool infer_ok();
-        bool infer_gold();
-        DataStructures::Decision infer();
-};
+  /*
+  *
+  * This class used to infer possible action to be performed by the agent.
+  * and it also updates the knowledgebase with the infered parameters
+  *
+  */
+  private:
+    std::vector<std::pair<int, int>> adjacent_rooms;
+    std::pair<int, int> wumpus_room;
+    KnowledgeBase current_kb;
 
-} 
-#endif;
+    bool is_valid_position(int i, int j);
+    std::vector<std::pair<int, int>> get_adjacent_rooms(std::pair<int, int> current_room);
+    std::pair<int, int> find_possible_move(std::pair<int, int> current_room);
+
+  public:
+    Inference(KnowledgeBase current_kb);
+    DataStructures::Decision infer(std::pair<int, int> current_room);
+};
+}
+#endif
