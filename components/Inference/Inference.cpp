@@ -105,6 +105,9 @@ vector<pair<int, int>> Inference::get_adjacent_rooms(pair<int, int> current_room
 Decision Inference::infer(pair<int, int> current_room)
 {
   Decision d;
+
+  
+
   return d;
 }
 // Decision Inference::infer(pair<int, int> current_room)
