@@ -62,4 +62,4 @@ class KnowledgeBase
 };  
 
 }
-#endif;
+#endif

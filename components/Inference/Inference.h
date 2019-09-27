@@ -4,7 +4,7 @@
 #include <map>
 #include <set>
 #include <vector>
-#include "KB.h"
+#include "../KnowledgeBase/KB.h"
 #include "../../utilities/DataStructures.h"
 
 
@@ -26,4 +26,4 @@ class Inference
 };
 
 } 
-#endif;
+#endif

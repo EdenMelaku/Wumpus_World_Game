@@ -1,7 +1,7 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-#include "KB.h"
+#include "../KnowledgeBase/KB.h"
 #include "../../utilities/DataStructures.h"
 
 
@@ -18,4 +18,4 @@ class Sensor
 };
      
 } 
-#endif;
+#endif
