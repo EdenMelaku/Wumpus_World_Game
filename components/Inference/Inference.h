@@ -4,7 +4,6 @@
 #include <map>
 #include <set>
 #include <vector>
-#include <tuple>
 #include "../KnowledgeBase/KB.h"
 #include "../../utilities/DataStructures.h"
 
@@ -22,15 +21,15 @@ class Inference
   private:
     std::vector<std::pair<int, int>> adjacent_rooms;
     std::pair<int, int> wumpus_room;
-    components::KnowledgeBase current_kb;
+    KnowledgeBase current_kb;
 
     bool is_valid_position(int i, int j);
     std::vector<std::pair<int, int>> get_adjacent_rooms(std::pair<int, int> current_room);
     std::pair<int, int> find_possible_move(std::pair<int, int> current_room);
 
   public:
-    Inference(components::KnowledgeBase current_kb);
-    DataStructures::Response infer(std::pair<int, int> current_room);
+    Inference(KnowledgeBase current_kb);
+    DataStructures::Decision infer(std::pair<int, int> current_room);
 };
 }
 #endif

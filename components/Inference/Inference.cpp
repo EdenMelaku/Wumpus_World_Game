@@ -1,13 +1,12 @@
+#include "Inference.h"
+
 
 namespace components{
 
-#include "Inference.h"
-
-using namespace components;
 using namespace DataStructures;
 using namespace std;
 
-Inference::Inference(components::KnowledgeBase current_kb)
+Inference::Inference(KnowledgeBase current_kb)
 {
   Inference::current_kb = current_kb;
 }
@@ -102,13 +101,13 @@ pair<int, int> Inference::find_possible_move(pair<int, int> current_room)
  * @param  current_room [current room position in pair<int, int> format]
  * @return              [response which contain the infered action and an updated knowledgebase]
  */
-Response Inference::infer(pair<int, int> current_room)
+Decision Inference::infer(pair<int, int> current_room)
 {
   std::map<std::pair<int, int>, DataStructures::Knowledge> data = current_kb.get_data();
   Knowledge room_data = current_kb.get_room_information(current_room);
   vector<pair<int, int>> adjacent_rooms = get_adjacent_rooms(current_room);
 
-  Response response;
+  Decision decision;
 
   // if there is no stench and no breeze
   if(!room_data.stench && !room_data.breeze) {
@@ -128,7 +127,7 @@ Response Inference::infer(pair<int, int> current_room)
         current_kb.change_information_wumpus(*itr, true);
         current_kb.change_information_possible_wumpus(*itr, false);
         pair<int, int> wumpus_room = *itr;
-        response.shoot_at = wumpus_room;
+        decision.shoot_at = wumpus_room;
       }else {
         continue;
       }
@@ -169,11 +168,10 @@ Response Inference::infer(pair<int, int> current_room)
 
   pair<int, int> selected_room = find_possible_move(current_room);
 
-  // data[current_room].visited = true;
   current_kb.change_information_visited(current_room, true);
 
-  // response.move_to = selected_room;
+  decision.move_to = selected_room;
 
-  return response;
+  return decision;
 }
 }
