@@ -22,12 +22,42 @@ class KnowledgeBase
     */
     private:
         std::map<std::pair<int, int>, DataStructures::Knowledge> data; 
+
+        std::map<std::pair<int, int>, DataStructures::Knowledge> get_data();
     public:
         KnowledgeBase();
         ~KnowledgeBase();
-        std::map<std::pair<int, int>, DataStructures::Knowledge> get_data();
         void add_into_knowledgebase(std::pair<int, int> room, DataStructures::Knowledge knowledge);
         void change_room_information(std::pair<int, int> room, DataStructures::Knowledge knowledge);
+        
+        // knowledge value getter methods
+        bool get_information_stench(std::pair<int, int> room);
+        bool get_information_breeze(std::pair<int, int> room);
+        bool get_information_glitter(std::pair<int, int> room);
+        bool get_information_bump(std::pair<int, int> room);
+        bool get_information_scream(std::pair<int, int> room);
+        bool get_information_possible_wumpus(std::pair<int, int> room);
+        bool get_information_wumpus(std::pair<int, int> room);
+        bool get_information_possible_pit(std::pair<int, int> room);
+        bool get_information_pit(std::pair<int, int> room);
+        bool get_information_gold(std::pair<int, int> room);
+        bool get_information_ok(std::pair<int, int> room);
+        bool get_information_visited(std::pair<int, int> room);
+        
+        // knowledge value setter methods
+        void change_information_stench(std::pair<int, int> room, bool value);
+        void change_information_breeze(std::pair<int, int> room, bool value);
+        void change_information_glitter(std::pair<int, int> room, bool value);
+        void change_information_bump(std::pair<int, int> room, bool value);
+        void change_information_scream(std::pair<int, int> room, bool value);
+        void change_information_possible_wumpus(std::pair<int, int> room, bool value);
+        void change_information_wumpus(std::pair<int, int> room, bool value);
+        void change_information_possible_pit(std::pair<int, int> room, bool value);
+        void change_information_pit(std::pair<int, int> room, bool value);
+        void change_information_gold(std::pair<int, int> room, bool value);
+        void change_information_ok(std::pair<int, int> room, bool value);
+        void change_information_visited(std::pair<int, int> room, bool value);
+
         DataStructures::Knowledge get_room_information(std::pair<int, int> room);
 };  
 
