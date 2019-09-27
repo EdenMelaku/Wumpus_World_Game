@@ -14,7 +14,9 @@ using namespace DataStructures;
     {
         current_kb = kb;
     }
+
     
+
     Decision Inference::infer()
     {
         Decision decision;

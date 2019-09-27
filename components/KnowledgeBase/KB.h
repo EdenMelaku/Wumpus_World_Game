@@ -22,6 +22,7 @@ class KnowledgeBase
     */
     private:
         std::map<std::pair<int, int>, DataStructures::Knowledge> data; 
+
         std::map<std::pair<int, int>, DataStructures::Knowledge> get_data();
     public:
         KnowledgeBase();
