@@ -113,7 +113,11 @@ Response Inference::infer(pair<int, int> current_room)
   // if there is no stench and no breeze
   if(!room_data.stench && !room_data.breeze) {
     for(auto itr = adjacent_rooms.begin(); itr < adjacent_rooms.end(); itr++){
+      // Knowledge k = current_kb.get_room_information(*itr);
+      // k.ok = true;
+      // current_kb.change_room_information(*itr, k);
         data[*itr].ok = true;
+      // change_ok_information(*itr, true);
     }
   // if there is stench
   }else if(room_data.stench) {
@@ -123,9 +127,10 @@ Response Inference::infer(pair<int, int> current_room)
       bool room_has_possible_wumpes = adjacent_room_data.possible_wumpus;
       bool room_has_wumpes = adjacent_room_data.wumpus;
       if(!room_is_ok && !room_has_possible_wumpes && !room_has_wumpes) {
-          data[*itr].possible_wumpus = true;
+        data[*itr].possible_wumpus = true;
+        // change_possible_wumpus_information(*itr, true);
       }else if(room_has_possible_wumpes) {
-          data[*itr].wumpus = true;
+        data[*itr].wumpus = true;
         pair<int, int> wumpus_room = *itr;
         response.shoot_at = wumpus_room;
       }else {
@@ -171,7 +176,6 @@ Response Inference::infer(pair<int, int> current_room)
   data[current_room].visited = true;
 
   response.move_to = selected_room;
-  // response.updated_knowledge = knowledge;
 
   return response;
 }

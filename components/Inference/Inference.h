@@ -10,11 +10,10 @@
 
 
 namespace components{
-struct Response{
-  std::pair<int, int> move_to;
-  std::pair<int, int> shoot_at;
-  // map<pair<int, int>, Knowledge> updated_knowledge;
-};
+// struct Response{
+//   std::pair<int, int> move_to;
+//   std::pair<int, int> shoot_at;
+// };
 
 class Inference
 {
@@ -35,7 +34,7 @@ class Inference
 
   public:
     Inference(components::KnowledgeBase current_kb);
-    Response infer(std::pair<int, int> current_room);
+    DataStructures::Response infer(std::pair<int, int> current_room);
 };
 }
 #endif

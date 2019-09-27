@@ -1,5 +1,6 @@
 #ifndef DS_H
 #define DS_H
+#include <tuple>
 
 
 namespace DataStructures{
@@ -29,12 +30,17 @@ namespace DataStructures{
         bool scream = false;
         bool wumpus = false;
     };
-    
+
     enum class Decision{
         move_left,
         move_right,
         move_up
     };
-    
+
+    struct Response{
+      std::pair<int, int> move_to;
+      std::pair<int, int> shoot_at;
+    };
+
 }
 #endif;
