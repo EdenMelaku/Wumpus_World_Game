@@ -70,10 +70,10 @@ pair<int, int> Inference::find_possible_move(pair<int, int> current_room)
 
   for(auto itr = adjacent_rooms.begin(); itr < adjacent_rooms.end(); itr++) {
     // if the adjacent room is ok and unvisited.
-    if(data[*itr].ok && !data[*itr].visited) {
+    if(current_kb.get_information_ok(*itr) && !current_kb.get_information_visited(*itr)) {
       possible_move_candidates1.push_back(*itr);
     // if the adjacent room is ok and visited.
-    }else if(data[*itr].ok && data[*itr].visited) {
+    }else if(current_kb.get_information_ok(*itr) && current_kb.get_information_visited(*itr)) {
       possible_move_candidates2.push_back(*itr);
     }else {
       possible_move_candidates3.push_back(*itr);
@@ -113,11 +113,7 @@ Response Inference::infer(pair<int, int> current_room)
   // if there is no stench and no breeze
   if(!room_data.stench && !room_data.breeze) {
     for(auto itr = adjacent_rooms.begin(); itr < adjacent_rooms.end(); itr++){
-      // Knowledge k = current_kb.get_room_information(*itr);
-      // k.ok = true;
-      // current_kb.change_room_information(*itr, k);
-        data[*itr].ok = true;
-      // change_ok_information(*itr, true);
+        current_kb.change_information_ok(*itr, true);
     }
   // if there is stench
   }else if(room_data.stench) {
@@ -127,10 +123,10 @@ Response Inference::infer(pair<int, int> current_room)
       bool room_has_possible_wumpes = adjacent_room_data.possible_wumpus;
       bool room_has_wumpes = adjacent_room_data.wumpus;
       if(!room_is_ok && !room_has_possible_wumpes && !room_has_wumpes) {
-        data[*itr].possible_wumpus = true;
-        // change_possible_wumpus_information(*itr, true);
+        current_kb.change_information_possible_wumpus(*itr, true);
       }else if(room_has_possible_wumpes) {
-        data[*itr].wumpus = true;
+        current_kb.change_information_wumpus(*itr, true);
+        current_kb.change_information_possible_wumpus(*itr, false);
         pair<int, int> wumpus_room = *itr;
         response.shoot_at = wumpus_room;
       }else {
@@ -144,10 +140,10 @@ Response Inference::infer(pair<int, int> current_room)
       bool room_has_possible_pit = current_kb.get_room_information(*itr).possible_pit;
       bool room_has_pit = current_kb.get_room_information(*itr).pit;
       if(!room_is_ok && !room_has_possible_pit && !room_has_pit) {
-          data[*itr].possible_pit = true;
+          current_kb.change_information_possible_pit(*itr, true);
       }else if(room_has_possible_pit) {
-          data[*itr].pit = true;
-          data[*itr].possible_pit = false;
+          current_kb.change_information_pit(*itr, true);
+          current_kb.change_information_possible_pit(*itr, false);
       }else{
         continue;
       }
@@ -155,16 +151,16 @@ Response Inference::infer(pair<int, int> current_room)
   // if there is stench and breeze
   }else {
     for(auto itr = adjacent_rooms.begin(); itr < adjacent_rooms.end(); itr++) {
-      bool room_is_ok = current_kb.get_room_information(*itr).ok;
-      bool room_has_possible_wumpes = current_kb.get_room_information(*itr).possible_wumpus;
-      bool room_has_possible_pit = current_kb.get_room_information(*itr).possible_pit;
+      bool room_is_ok = current_kb.get_information_ok(*itr);
+      bool room_has_possible_wumpes = current_kb.get_information_possible_wumpus(*itr);
+      bool room_has_possible_pit = current_kb.get_information_possible_pit(*itr);
       if(!room_is_ok && !room_has_possible_wumpes && !room_has_possible_pit) {
-          data[*itr].possible_wumpus = true;
-          data[*itr].possible_pit = true;
+          current_kb.change_information_possible_wumpus(*itr, true);
+          current_kb.change_information_possible_pit(*itr, true);
       }else if(room_has_possible_wumpes) {
-          data[*itr].wumpus = true;
+          current_kb.change_information_wumpus(*itr, true);
       }else if(room_has_possible_pit) {
-          data[*itr].pit = true;
+          current_kb.change_information_pit(*itr, true);
       }else {
         continue;
       }
@@ -173,9 +169,10 @@ Response Inference::infer(pair<int, int> current_room)
 
   pair<int, int> selected_room = find_possible_move(current_room);
 
-  data[current_room].visited = true;
+  // data[current_room].visited = true;
+  current_kb.change_information_visited(current_room, true);
 
-  response.move_to = selected_room;
+  // response.move_to = selected_room;
 
   return response;
 }

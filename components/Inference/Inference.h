@@ -10,10 +10,6 @@
 
 
 namespace components{
-// struct Response{
-//   std::pair<int, int> move_to;
-//   std::pair<int, int> shoot_at;
-// };
 
 class Inference
 {
