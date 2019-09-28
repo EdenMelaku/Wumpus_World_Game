@@ -38,27 +38,27 @@ void printUI()
 
             if (pg.visiblity.at(i).at(j))
             {
-                if (pg.world.boxes.at(i).at(j).get_breeze())
+                if (pg.playableworld.world.boxes.at(i).at(j).get_breeze())
                 {
                     s = s + "B";
                 }
-                if (pg.world.boxes.at(i).at(j).get_stench())
+                if (pg.playableworld.world.boxes.at(i).at(j).get_stench())
                 {
                     s = s + "S";
                 }
-                if (pg.world.boxes.at(i).at(j).get_glitter())
+                if (pg.playableworld.world.boxes.at(i).at(j).get_glitter())
                 {
                     s = s + "G";
                 }
-                if (pg.world.boxes.at(i).at(j).has_gold())
+                if (pg.playableworld.world.boxes.at(i).at(j).has_gold())
                 {
                     s = s + "Gold";
                 }
-                if (pg.world.boxes.at(i).at(j).has_pit())
+                if (pg.playableworld.world.boxes.at(i).at(j).has_pit())
                 {
                     s = s + "P";
                 }
-                if (pg.world.boxes.at(i).at(j).has_wumpus())
+                if (pg.playableworld.world.boxes.at(i).at(j).has_wumpus())
                 {
                     s = s + "W";
                 }
@@ -88,7 +88,7 @@ int main()
     }
     playableWorld playableworld = playableWorld(make_pair(0, 0), "up",world);
 
-    pg = PlayGround(player, world, playableworld);
+    pg = PlayGround(player, playableworld);
 
     for (int i = 0; i < size; i++)
     {
