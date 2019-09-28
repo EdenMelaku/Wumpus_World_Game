@@ -4,14 +4,7 @@ this is a wumpus world Environment implementation code .
 
 */
 
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <iostream>
-#include <bits/stdc++.h>
-#include <set>
-#include <ctime>
-#include "Room.h"
+
 #include "World.h"
 using namespace std;
 
@@ -248,4 +241,18 @@ int World::convert_vector_to_1d(vector<int> pos)
 {
     int position = pos[0] + (pos[1] * size);
     return position;
+}
+void World::remove_wumpus(){
+    pair<int,int> location=get_wumpus_location();
+    boxes.at(location.first).at(location.second).set_occupant(Occupant::empty);
+    int pos[]={location.first, location.second};
+    vector<int> adjacents=get_adjacent_rooms(convert_to_1d(pos));
+    for (int i = 0; i < adjacents.size(); i++)
+    {
+        vector<int> add = convert_to_2d(adjacents.at(i));
+        int pos[] = {add.at(0), add.at(1)};
+        boxes.at(pos[0]).at(pos[1]).set_stench(false);
+        //cout<<pos[0]<<", "<<pos[1]<<" stench"<<endl;
+    }
+
 }
