@@ -30,7 +30,6 @@ public:
    bool is_wumpus_dead;
     bool is_agent_dead;
     bool is_gold_found;
-    World world;
     actions action;
     string player;
     string direction;
@@ -39,7 +38,7 @@ public:
     playableWorld playableworld;
     vector<vector<bool>> visiblity;
     PlayGround();
-    PlayGround(string player, World world,playableWorld playableworld);
+    PlayGround(string player,playableWorld playableworld);
     int arrow = 1;
     void penalize(int value);
     void reward(int value);

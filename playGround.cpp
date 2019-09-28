@@ -12,9 +12,8 @@ using namespace std;
 PlayGround::PlayGround()
 {
     ;
-}PlayGround::PlayGround(string player, World world,playableWorld playableworld)
+}PlayGround::PlayGround(string player,playableWorld playableworld)
 {
-    world = world;
     player = player;
     playableworld =playableworld;
     is_agent_dead = false;
@@ -46,8 +45,8 @@ void PlayGround::changeDir(string dir){
 void PlayGround::kill_agent()
 {
   pair<int, int> agent_location = playableworld.get_agent_location();
-  pair<int, int> wumpus_location = world.get_wumpus_location();
-  vector<pair<int, int> > pit_locations = world.get_pit_locations();
+  pair<int, int> wumpus_location = playableworld.world.get_wumpus_location();
+  vector<pair<int, int> > pit_locations = playableworld.world.get_pit_locations();
   set<pair<int,int> > pits(pit_locations.begin(),pit_locations.end());
   if(agent_location == wumpus_location || pits.find(agent_location)!=pits.end()){
     
@@ -66,7 +65,7 @@ vector<sensor> PlayGround::infer()
     if(move) { location = playableworld.move_forward(); }
     if(shoot) { playableworld.shoot(); }
 
-    Room room = world.boxes.at(location.first).at(location.second);
+    Room room = playableworld.world.boxes.at(location.first).at(location.second);
     vector<sensor> perception;
     if(room.get_breeze()) {
         Type type=Type::B;

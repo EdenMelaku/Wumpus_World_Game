@@ -1,7 +1,6 @@
 #include "playableWorld.h"
 #include <set>
 
-World world;
 
 playableWorld::playableWorld(){}
 playableWorld::playableWorld(pair<int, int> agent_location, string agent_direction,World worldd )
