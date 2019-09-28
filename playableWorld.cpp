@@ -1,28 +1,35 @@
 #include "playableWorld.h"
+#include <set>
 
-playableWorld::playableWorld(pair<int, int> agent_location, string agent_direction)
+World world;
+
+playableWorld::playableWorld(){}
+playableWorld::playableWorld(pair<int, int> agent_location, string agent_direction,World worldd )
 {
-  playableWorld::agent_location = agent_location;
-  playableWorld::agent_direction = agent_direction;
+  agent_location = agent_location;
+  agent_direction = agent_direction;
+  world=worldd;
+
+
 }
 
 pair<int, int> playableWorld::get_agent_location()
 {
-  return playableWorld::agent_location;
+  return agent_location;
 }
 
 void playableWorld::set_agent_location(pair<int, int> agent_location)
 {
-  playableWorld::agent_location = agent_location;
+ agent_location = agent_location;
 }
 
 string playableWorld::get_agent_direction(){
-  return playableWorld::agent_direction;
+  return agent_direction;
 }
 
 void playableWorld::set_agent_direction(string agent_direction)
 {
-  playableWorld::agent_direction = agent_direction;
+  agent_direction = agent_direction;
 }
 
 string playableWorld::turn_left()
@@ -183,52 +190,12 @@ bool playableWorld::is_wumpus_in_line_sight(pair<int, int> wumpus_location){
 
 // shoot on the wumpus if it is been founded
 void playableWorld::shoot( ){
-  pair<int, int> wumpus_location = World::get_wumpus_location();
+  pair<int, int> wumpus_location = world.get_wumpus_location();
  // bool has_arrow = play_Ground::arrow=1;
-  if(has_arrow){
+  if(arrow>0){
     if(is_wumpus_in_line_sight(wumpus_location)){
-      World::remove_wumpus(); 
+      world.remove_wumpus(); 
     }
-    play_Ground::arrow--;
+   arrow--;
   }
 }
-
-//kills the agent
-void playableWorld::kill_agent()
-{
-  pair<int, int> agent_location = playableWorld::get_agent_location();
-  pair<int, int> wumpus_location = World::get_wumpus_location();
-  vector<pair<int, int>> pit_locations = World::get_pit_location();
-  if(agent_location == wumpus_location || agent_location == pit_locations){
-    Agent::set_alive(false);
-  }
-}
-
-//checks if the game is over(is_wumpus_dead  V  is_gold_found V  is_agent_dead) ,
-// can be called after every action(move, shoot)
-bool playableWorld::is_game_over()
-{
-  if(!Agent::get_alive()){
-    return true;
-  }else if(Agent::get_found_gold()){
-    return true;
-  }else{
-    return false;
-  }
-}
-/**
-int main(int argc, char const *argv[]) {
-  //cout << "this is simple test on the actuaror class\n";
-  pair<int, int> agent_location = make_pair(1, 1);
-  string agent_direction = "right";
-  playableWorld playableWorld = playableWorld(agent_location, agent_direction);
-  //cout << "starting agent direction " << agent_direction << endl;
-  //cout << "starting agent_location (" << agent_location.first <<", " << agent_location.second <<")" << endl;
-  string updated_agent_direction = playableWorld.turn_left();
-  pair<int, int> updated_agent_location = playableWorld.move_forward();
-  cout << "---------------------------------------------------" << endl;
-  cout << "updated agent direction " << updated_agent_direction << endl;
-  cout << "updated agent_location (" << updated_agent_location.first <<", " << updated_agent_location.second <<")" << endl;
-  return 0;
-}
-*/
