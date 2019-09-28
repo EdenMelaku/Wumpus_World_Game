@@ -7,11 +7,14 @@ class playableWorld
 private:
   pair<int, int> agent_location;
   string agent_direction;
+  int arrow;
+ // PlayGround playground;
 
 public:
   // the class constructor
-  playableWorld(pair<int, int> agent_location, string agent_direction);
-
+  
+  playableWorld(pair<int, int> agent_location, string agent_direction,World world);
+  playableWorld();
   // getter and setter for agent_location attribute
   pair<int, int> get_agent_location();
   void set_agent_location(pair<int, int>);
