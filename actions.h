@@ -5,19 +5,19 @@
 #ifndef WUMPUS_WORLD_GAME_ACTIONS_H
 #define WUMPUS_WORLD_GAME_ACTIONS_H
 #include "sensor.h"
+#include <vector>
 
-class actions {
-private:
-    bool turnleft ;
+class actions
+{
+
+public:
+    bool turnleft;
     bool turnright;
-    bool turnup;
-    bool turndown;
     bool shoot;
     bool move;
-public:
-     vector<Sensor> run();
-
+    vector<int> turns;
+    actions();
+    actions(bool turnleft, bool turnright, bool shoot, bool move, vector<int> turns);
 };
-
 
 #endif //WUMPUS_WORLD_GAME_ACTIONS_H
