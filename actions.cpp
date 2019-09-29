@@ -12,11 +12,11 @@
  *
  */
 actions::actions() {;}
-actions::actions(bool turnleft, bool turnright,bool shoot,bool move, vector<int> turns){
-     turnleft =turnleft;
-     turnright=turnright;
-     shoot=shoot;
-     move=move;
-     turns=turns;
+actions::actions(bool turnleftt, bool turnrightt,bool shoott,bool movee, vector<int> turnss){
+     turnleft =turnleftt;
+     turnright=turnrightt;
+     shoot=shoott;
+     move=movee;
+     turns=turnss;
     
     }

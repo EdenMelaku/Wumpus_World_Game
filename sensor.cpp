@@ -4,9 +4,9 @@
 using namespace std;
 
 sensor::sensor() {}
-sensor::sensor(pair<int, int> location, Type type) {
-    location = location;
-    sense = type;
+sensor::sensor(pair<int, int> locationn, Type typee) {
+    location = locationn;
+    sense = typee;
 }
 
 void sensor::setType(Type type) { sense = type; }

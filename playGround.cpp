@@ -12,10 +12,10 @@ using namespace std;
 PlayGround::PlayGround()
 {
     ;
-}PlayGround::PlayGround(string player,playableWorld playableworld)
+}PlayGround::PlayGround(string playerr, playableWorld playableworldd)
 {
-    player = player;
-    playableworld =playableworld;
+    player = playerr;
+    playableworld =playableworldd;
     is_agent_dead = false;
     is_wumpus_dead = false;
     is_gold_found = false;
@@ -58,12 +58,14 @@ void PlayGround::kill_agent()
 vector<sensor> PlayGround::infer()
 {
     pair<int, int> location=playableworld.get_agent_location();
-    if(action.turnleft) {playableworld.turn_left();}
-    else if(action.turnright) { playableworld.turn_right(); }
+    
+    //if(action.turnleft) {playableworld.turn_left();}
+    //else if(action.turnright) { playableworld.turn_right(); }
     
 
-    if(move) { location = playableworld.move_forward(); }
-    if(shoot) { playableworld.shoot(); }
+    if(action.move) { location = playableworld.move_forward(); }
+    if(action.shoot) { playableworld.shoot(); }
+
 
     Room room = playableworld.world.boxes.at(location.first).at(location.second);
     vector<sensor> perception;

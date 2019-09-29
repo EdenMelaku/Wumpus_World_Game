@@ -36,7 +36,7 @@ public:
     string turn;
 
     playableWorld playableworld;
-    vector<vector<bool>> visiblity;
+    vector<vector<bool> > visiblity;
     PlayGround();
     PlayGround(string player,playableWorld playableworld);
     int arrow = 1;

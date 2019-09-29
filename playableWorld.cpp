@@ -3,10 +3,10 @@
 
 
 playableWorld::playableWorld(){}
-playableWorld::playableWorld(pair<int, int> agent_location, string agent_direction,World worldd )
+playableWorld::playableWorld(pair<int, int> agent_locationn, string agent_directionn,World worldd )
 {
-  agent_location = agent_location;
-  agent_direction = agent_direction;
+  agent_location = agent_locationn;
+  agent_direction = agent_directionn;
   world=worldd;
 
 
@@ -17,18 +17,22 @@ pair<int, int> playableWorld::get_agent_location()
   return agent_location;
 }
 
-void playableWorld::set_agent_location(pair<int, int> agent_location)
-{
- agent_location = agent_location;
+void playableWorld::set_agent_location(pair<int, int> agent_locationn)
+{ 
+  if(world.is_valid_position(agent_location.first, agent_location.second)){ 
+    agent_location = agent_locationn;
+  }else{cout<<"BUMP"<<endl;}
+  cout<<agent_location.first<<","<< agent_location.second<<endl;
+
 }
 
 string playableWorld::get_agent_direction(){
   return agent_direction;
 }
 
-void playableWorld::set_agent_direction(string agent_direction)
+void playableWorld::set_agent_direction(string agent_directionn)
 {
-  agent_direction = agent_direction;
+  agent_direction = agent_directionn;
 }
 
 string playableWorld::turn_left()
@@ -104,6 +108,7 @@ void playableWorld::move_down()
     updated_agent_location.first = agent_location.first - 1;
     updated_agent_location.second = agent_location.second;
   }
+
   set_agent_location(updated_agent_location);
 }
 

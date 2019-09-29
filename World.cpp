@@ -12,12 +12,12 @@ World::World()
 {
     ;
 }
-World::World(int size)
+World::World(int sizee)
 {
-    World::size = size;
+    size = sizee;
     init_empty_world();
     generate_position();
-    World::pos = 0;
+    pos = 0;
 
     // check_percolaton();
 }
@@ -43,27 +43,27 @@ pair<int, int> World::get_wumpus_location()
 }
 void World::set_wumpus_location(pair<int, int> wumpus_location)
 {
-    World::wumpus_location = wumpus_location;
+    wumpus_location = wumpus_location;
 }
 
 // getter and setter for pit_locations attribute
 vector<pair<int, int>> World::get_pit_locations()
 {
-    return World::pit_locations;
+    return pit_locations;
 }
 void World::set_pit_locations(vector<pair<int, int>> pit_locations)
 {
-    World::pit_locations = pit_locations;
+    pit_locations = pit_locations;
 }
 
 // getter and setter for gold_location attribute
 pair<int, int> World::get_gold_location()
 {
-    return World::gold_location;
+    return gold_location;
 }
 void World::set_gold_location(pair<int, int> gold_location)
 {
-    World::gold_location = gold_location;
+    gold_location = gold_location;
 }
 
 //generates random positions along with sensor information
