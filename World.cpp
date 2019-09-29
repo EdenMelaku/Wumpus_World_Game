@@ -1,17 +1,22 @@
-/*
-this is a wumpus world Environment implementation code .
-
-
-*/
-
-
 #include "World.h"
+
+
 using namespace std;
 
+/**
+ * @brief Construct a new World:: World object
+ * 
+ */
 World::World()
 {
     ;
 }
+
+/**
+ * @brief Construct a new World:: World object
+ * 
+ * @param sizee The size of the World to be constructed. The result of which is a row by column grid with row = column = sizee. 
+ */
 World::World(int sizee)
 {
     size = sizee;
@@ -21,7 +26,11 @@ World::World(int sizee)
 
     // check_percolaton();
 }
-//initializes an empty box with no position information
+
+/**
+ * @brief Initialize an empty world grid with no information about the rooms that make it up.
+ * 
+ */
 void World::init_empty_world()
 {
     int count = size;
@@ -36,37 +45,71 @@ void World::init_empty_world()
         boxes.push_back(vecs);
     }
 }
-// getter and setter for wumpus_location attribute
+
+/**
+ * @brief Access the location of the wumpus within the world.
+ * 
+ * @return pair<int, int>   The row and column information of the wumpus.
+ */
 pair<int, int> World::get_wumpus_location()
 {
     return wumpus_location;
 }
+
+/**
+ * @brief Store the location of the wumpus in an data member for faster access.
+ * 
+ * @param wumpus_location   pair<int, int> value of the location of the wumpus.
+ */
 void World::set_wumpus_location(pair<int, int> wumpus_location)
 {
     wumpus_location = wumpus_location;
 }
 
-// getter and setter for pit_locations attribute
+/**
+ * @brief Access the location of the pits that are present in the world.
+ * 
+ * @return vector<pair<int, int>>  A vector that holds the row and column attributes of the rooms with pits.
+ */
 vector<pair<int, int>> World::get_pit_locations()
 {
     return pit_locations;
 }
+
+/**
+ * @brief Store the locaton of the pits in a vector.
+ * 
+ * @param pit_locations The vector that hold the row and column values of the rooms that have pits.
+ */
 void World::set_pit_locations(vector<pair<int, int>> pit_locations)
 {
     pit_locations = pit_locations;
 }
 
-// getter and setter for gold_location attribute
+/**
+ * @brief The location of the gold in the world.
+ * 
+ * @return pair<int, int>  The row and column value of the location of the room containing gold.
+ */
 pair<int, int> World::get_gold_location()
 {
     return gold_location;
 }
+
+/**
+ * @brief Set the location of the rooms with gold within the world.
+ * 
+ * @param gold_location The row and column value of the room containing the gold.
+ */
 void World::set_gold_location(pair<int, int> gold_location)
 {
     gold_location = gold_location;
 }
 
-//generates random positions along with sensor information
+/**
+ * @brief Generate random positions for the rooms within the world that will have the pits, wumpus and gold.
+ * 
+ */
 void World::generate_position()
 {
     srand((int)time(0));
@@ -130,7 +173,12 @@ void World::generate_position()
     //3- ASSIGNING gold
     create_gold(gold);
 }
-//creates a wumpus room at position and initialize a stench in adjacent rooms
+
+/**
+ * @brief Set a wumpus in a room. Set stench attributes in adjacent rooms.
+ * 
+ * @param wumpus The row and column value of the location of the wumpus.
+ */
 void World::create_wumpus(pair<int, int> wumpus)
 {
     int pos[] = {wumpus.first, wumpus.second};
@@ -153,7 +201,12 @@ void World::create_wumpus(pair<int, int> wumpus)
         //cout<<pos[0]<<", "<<pos[1]<<" stench"<<endl;
     }
 }
-//creates a pit room at position and initialize a breez in adjacent rooms
+
+/**
+ * @brief Sets a pit in a room. Sets breeze attributes in adjacent rooms.
+ * 
+ * @param pit The row and column value of the location of the pit.
+ */
 void World::create_pit(pair<int, int> pit)
 {
 
@@ -180,7 +233,12 @@ void World::create_pit(pair<int, int> pit)
         //  cout<<pos[0]<<", "<<pos[1]<<" breez"<<endl;
     }
 }
-//creates a gold room at position and initialize a glitter in the rooms
+
+/**
+ * @brief Set a gold in a room.
+ * 
+ * @param gold 
+ */
 void World::create_gold(pair<int, int> gold)
 {
     int pos[] = {gold.first, gold.second};
@@ -214,14 +272,36 @@ vector<int> World::get_adjacent_rooms(int positon)
     }
     return adjacents;
 }
-//validates is a position is valid or not if not valid then bump
+
+/**
+ * @brief Validates if a room accessed with certain row and column attributes is a valid entry. Returns bump if it isn't.
+ * 
+ * @param i Row attripute of a room.
+ * @param j Column attribute of a room.
+ * @return true The room exists in the constructed world.
+ * @return false The room does not exist in the constructed world.
+ */
 bool World::is_valid_position(int i, int j)
 {
     return (i >= 0 && j >= 0 && i < size && j < size);
 }
-//checks if there is a way between the agent position(0,0) and the gold at
+
+/**
+ * @brief Checks if there is a way between the agent and the gold as the World is constructed.
+ * 
+ * @param agent_pos         The initial position of the agent.
+ * @param gold_position     The position of the room containing the gold in the world.
+ * @return true             There is a traversal between the agent's initial position and the gold.
+ * @return false            There is no valid traversal between the agent's initial position and the gold.
+ */
 bool check_percolaton(int agent_pos, int gold_position);
-//converts 1d position to 2d
+
+/**
+ * @brief Converts 1D location of the rooms in the grid to 2D representation in terms of rows and columns.
+ * 
+ * @param position The index of the room in the world grid.
+ * @return vector<int> The converted location of the room in row and column format.
+ */
 vector<int> World::convert_to_2d(int position)
 {
     int i = position % size;
@@ -229,19 +309,35 @@ vector<int> World::convert_to_2d(int position)
     vector<int> arr = {i, j};
     return arr;
 }
-//converts 2d position to 1d
+
+/**
+ * @brief Converts the 2D representation of the room into it's 1D location (index) in the World grid.
+ * 
+ * @param pos       The row and column attributes of the room.
+ * @return int      The index of the room within the world grid.
+ */
 int World::convert_to_1d(int pos[])
 {
     int position = pos[0] + (pos[1] * size);
     return position;
 }
 
-//converts 2d position to 1d
+/**
+ * @brief Converts the 2D representation of the room into it's 1D location (index) in the World grid.
+ * 
+ * @param pos       The row and column attributes of the room.
+ * @return int      The index of the room within the world grid.
+ */
 int World::convert_vector_to_1d(vector<int> pos)
 {
     int position = pos[0] + (pos[1] * size);
     return position;
 }
+
+/**
+ * @brief Removes the wumpus from the room within the world.
+ * 
+ */
 void World::remove_wumpus(){
     pair<int,int> location=get_wumpus_location();
     boxes.at(location.first).at(location.second).set_occupant(Occupant::empty);
