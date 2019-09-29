@@ -1,2 +1,0 @@
-/usr/bin/ar qc libActuator_lib.a  CMakeFiles/Actuator_lib.dir/Actuator.cpp.o
-/usr/bin/ranlib libActuator_lib.a

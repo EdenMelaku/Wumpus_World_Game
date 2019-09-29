@@ -1,2 +1,0 @@
-/usr/bin/ar qc libKnowledgeBase_lib.a  CMakeFiles/KnowledgeBase_lib.dir/KB.cpp.o
-/usr/bin/ranlib libKnowledgeBase_lib.a
