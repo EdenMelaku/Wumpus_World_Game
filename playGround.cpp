@@ -55,7 +55,7 @@ void PlayGround::kill_agent()
   }
 }
 
-vector<sensor> PlayGround::infer()
+vector<sensor> PlayGround::execute()
 {
     pair<int, int> location=playableworld.get_agent_location();
     

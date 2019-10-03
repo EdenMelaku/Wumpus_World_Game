@@ -49,6 +49,6 @@ public:
     bool is_game_over();
     //vector<Sensor> infer(actions ac);
     void kill_agent();
-    vector<sensor> infer();
+    vector<sensor> execute();
 };
 #endif

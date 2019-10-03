@@ -173,14 +173,14 @@ int main()
             ac.move = true;
             pg.action = ac;
             cout<<"to infer"<<endl;
-            pg.infer();
+            pg.execute();
 
             break;
 
         case 's':
             ac.shoot = true;
             pg.action = ac;
-            pg.infer();
+            pg.execute();
             break;
         }
     }
