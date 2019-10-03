@@ -70,7 +70,7 @@ void playableWorld::move_left()
 {
   pair<int, int> agent_location = get_agent_location();
   pair<int, int> updated_agent_location;
-  if(agent_location.second == 1){
+  if(agent_location.second == 0){
     // if agent location is in the left edge
     updated_agent_location.first = agent_location.first;
     updated_agent_location.second = agent_location.second;
@@ -85,7 +85,7 @@ void playableWorld::move_right()
 {
   pair<int, int> agent_location = get_agent_location();
   pair<int, int> updated_agent_location;
-  if(agent_location.second == 4){
+  if(agent_location.second == 3){
     // if agent location is in the right edge
     updated_agent_location.first = agent_location.first;
     updated_agent_location.second = agent_location.second;
@@ -100,7 +100,7 @@ void playableWorld::move_down()
 {
   pair<int, int> agent_location = get_agent_location();
   pair<int, int> updated_agent_location;
-  if(agent_location.second == 1){
+  if(agent_location.second == 2){
     // if agent location is in the bottom edge
     updated_agent_location.first = agent_location.first;
     updated_agent_location.second = agent_location.second;
@@ -116,7 +116,7 @@ void playableWorld::move_top()
 {
   pair<int, int> agent_location = get_agent_location();
   pair<int, int> updated_agent_location;
-  if(agent_location.first == 4){
+  if(agent_location.first == 3){
     // if agent location is in the left edge
     updated_agent_location.first = agent_location.first;
     updated_agent_location.second = agent_location.second;
