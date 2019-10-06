@@ -1,14 +1,12 @@
-#ifndef IA.h
-#define IA.h
+#ifndef IA_H
+#define IA_H
 
-#include  "Sensor.h"
-#include "KB.h"
-#include "Inference.h"
-#include "Actuator.h"
+#include "../../components/Sensor/Sensor.h"
+#include "../../components/KnowledgeBase/KB.h"
+#include "../../components/Inference/Inference.h"
+#include "../../components/Actuator/Actuator.h"
 
 namespace agent{
-
-using namespace components;
 
 class IntelligentAgent
 {
@@ -26,4 +24,4 @@ class IntelligentAgent
 
 }
 
-#endif;
+#endif

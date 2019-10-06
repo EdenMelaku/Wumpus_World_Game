@@ -3,10 +3,15 @@ project (IntelligentAgent-WumpusWorld)
 
 # set(CMAKE_CXX_STANDARD 14)
 
+# add_subdirectory(utilities)
 add_subdirectory(components/KnowledgeBase)
 add_subdirectory(components/Sensor)
 add_subdirectory(components/Inference)
 add_subdirectory(components/Actuator)
-# add_subdirectory(utilities)
-# add_subdirectory(agent)
+add_subdirectory(agent/IntelligentAgent)
+
+set(iagent sth.cpp)
+add_executable(myagent ${iagent})
+
+target_link_libraries(myagent IntelligentAgent_lib)
 
