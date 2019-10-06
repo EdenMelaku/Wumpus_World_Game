@@ -24,7 +24,6 @@ class KnowledgeBase
         std::map<std::pair<int, int>, DataStructures::Knowledge> data;
     public:
         KnowledgeBase();
-        ~KnowledgeBase();
         std::map<std::pair<int, int>, DataStructures::Knowledge> get_data();
         void add_into_knowledgebase(std::pair<int, int> room, DataStructures::Knowledge knowledge);
         void change_room_information(std::pair<int, int> room, DataStructures::Knowledge knowledge);

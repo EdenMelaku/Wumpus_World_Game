@@ -7,6 +7,9 @@ namespace agent{
 
 using namespace DataStructures;
 
+IntelligentAgent::IntelligentAgent(){
+    ;
+}
 // Action IntelligentAgent::go(Information information)
 // {
 //     ia_sensor.sense(information);

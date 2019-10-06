@@ -10,7 +10,6 @@ class Actuator
 {
     public:
         Actuator();
-        ~Actuator();
         void actuate(DataStructures::Decision decision); //change return type to action
 };
 

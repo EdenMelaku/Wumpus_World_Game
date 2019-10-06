@@ -5,6 +5,9 @@ namespace components{
 
 using namespace DataStructures; 
 
+    KnowledgeBase::KnowledgeBase(){
+        ;
+    }
     /**
      * @brief Get knowledgebase data structure
      * 
