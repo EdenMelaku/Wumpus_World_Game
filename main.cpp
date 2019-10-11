@@ -20,7 +20,7 @@ void printsep(int size)
 {
     for (int i = 0; i < size; i++)
     {
-        cout << "__________";
+        cout << "_______________";
         
     }
     
@@ -28,36 +28,55 @@ void printsep(int size)
 
     for (int i = 0; i < size; i++)
     {
-        cout << setw(10) << "|";
+        cout << setw(15) << "|";
     }
     cout << endl;
 }
+
+
+
+
+
+
+
+
 void printUI()
-{
+{       pair<int, int> location=pg.playableworld.agent_location;
+        Room room = pg.playableworld.world.boxes.at(location.first-1).at(location.second-1);
+    cout<<pg.playableworld.pl<<endl;
+    cout<<room.get_breeze()<<" "<<room.get_stench()<<" "<<room.has_pit()<<" "<<room.has_wumpus()<<endl;
     cout << "your direction= " << pg.playableworld.get_agent_direction() << endl;
     cout << "arrow left= " << pg.arrow << endl;
-    cout << "location= " << pg.playableworld.get_agent_location().first<<","<< pg.playableworld.get_agent_location().first << endl;
-    for (int i = size - 1; i >= 0; i--)
-    {
-        printsep(size);
-        for (int j = 0; j < size; j++)
-        {
-            string s = "";
-             bool here=(pg.playableworld.get_agent_location().first==i)&&(pg.playableworld.get_agent_location().second==j);
-            if (pg.visiblity.at(i).at(j))
-            {
+    cout << "location= " << pg.playableworld.agent_location.second<<","<< pg.playableworld.agent_location.first << endl;
+    
+    vector<vector<Room> >::reverse_iterator iter;
+    int i=0;
+    int r=3;
 
-                if (pg.playableworld.world.boxes.at(i).at(j).get_breeze())
+    for (iter=pg.playableworld.world.boxes.rbegin(); iter!=pg.playableworld.world.boxes.rend();++iter)
+    {   
+        printsep(size);
+        vector<Room>::iterator i;
+        vector<Room> line=*iter;
+        int j=0;
+        for (i=line.begin(); i !=line.end(); ++i)
+        {  
+            string s = "";
+            Room r=*i;
+             bool here = (r.getLocation()== pg.playableworld.agent_location);
+        
+             
+                if (r.get_breeze())
                 {
                     s = s + "B";
                 }
 
-                if (pg.playableworld.world.boxes.at(i).at(j).get_stench())
+                if (r.get_stench())
                 {
                     s = s + "S";
                 }
 
-                if (pg.playableworld.world.boxes.at(i).at(j).get_glitter())
+                if (r.get_glitter())
                 {
                     s = s + "G";
                 }
@@ -66,21 +85,37 @@ void printUI()
                 {
                     s = s + "YOU";
                 }
-                if (pg.playableworld.world.boxes.at(i).at(j).has_pit())
+                if (r.has_pit())
                 {
                     s = s + "P";
                 }
 
-                if (pg.playableworld.world.boxes.at(i).at(j).has_wumpus())
+                if (r.has_wumpus())
                 {
                     s = s + "W";
                 }
-            }
-            cout << setw(2) << i << setw(2) << "," << setw(2) << j << setw(2) << s << setw(2) << "|";
+            
+            int x= r.getLocation().first;
+            int y=r.getLocation().second;
+            cout << setw(3) <<y<< setw(3) << "," << setw(3) << x<< setw(3) << s << setw(3) << "|";
+            j++;
         }
+        i++;
         cout << endl;
+         for (int i = 0; i < size; i++)
+    {
+        cout << "______________";
+        
     }
+        
+    }
+    
 }
+
+
+
+
+
 void ClearScreen()
 {
     int n;
@@ -99,7 +134,7 @@ int main()
         cout << "not supoorted yet" << endl;
         return 1;
     }
-    playableWorld playableworld = playableWorld(make_pair(0, 0), "top", world);
+    playableWorld playableworld = playableWorld(make_pair(1, 1), "top", world);
     //cout<<playableworld.world.boxes.at(0).at(0).get_breeze()<<endl;
     pg = PlayGround(player, playableworld);
     //cout<<pg.playableworld.world.boxes.at(0).at(0).get_breeze()<<endl;
@@ -131,11 +166,11 @@ int main()
         // printUI();
     while (!pg.is_game_over())
     {   endwin();
+        ClearScreen();
         printUI();
- 
         initscr();
        keypad(stdscr, TRUE);  
-        ClearScreen();
+        
 
         // printUI();
         vector<bool> arguments = {false, false, false, false};
@@ -145,7 +180,8 @@ int main()
         int ch = getch();
         switch (ch)
         {
-
+        case 127:
+        case '\b':
         case KEY_BACKSPACE:
             cout << "game interupted by player" << endl;
             return 1;
@@ -169,6 +205,25 @@ int main()
             ac.turnright = true;
             numOf_turns.at(1)++;
             break;
+
+         case KEY_UP:
+
+            pg.changeDir("up");
+            pg.playableworld.turn_up();
+            printw("/n",pg.playableworld.get_agent_direction());
+            ac.turnleft = true;
+            numOf_turns.at(0)++;
+
+            break;
+
+        case KEY_DOWN:
+
+            pg.changeDir("down");
+            pg.playableworld.turn_down();
+            printw("/n",pg.playableworld.get_agent_direction());
+            ac.turnright = true;
+            numOf_turns.at(1)++;
+            break;
         case 10:
             ac.move = true;
             pg.action = ac;
@@ -176,14 +231,21 @@ int main()
             pg.execute();
 
             break;
-
-        case 's':
+        case KEY_F(1):
+            cout<<"touched"<<endl;
             ac.shoot = true;
             pg.action = ac;
             pg.execute();
-            break;
-        }
-    }
 
-    return 1;
+            break;
+      
+    }}
+
+        endwin();
+        if(pg.is_agent_dead) { cout<<"GAME OVER YOU ARE DEAD"<<endl;}
+       
+        else if(pg.is_gold_found) {cout<<"YOU FOUND THE GOLD"<<endl;
+        }
+         printUI();
+        
 }

@@ -20,7 +20,7 @@ PlayGround::PlayGround()
     is_wumpus_dead = false;
     is_gold_found = false;
     direction = "up";
-    action=actions(false,false,false,false,{0,0});
+    action=actions();
 }
 
 void PlayGround::penalize(int value)
@@ -44,30 +44,24 @@ void PlayGround::changeDir(string dir){
 
 void PlayGround::kill_agent()
 {
-  pair<int, int> agent_location = playableworld.get_agent_location();
-  pair<int, int> wumpus_location = playableworld.world.get_wumpus_location();
-  vector<pair<int, int> > pit_locations = playableworld.world.get_pit_locations();
-  set<pair<int,int> > pits(pit_locations.begin(),pit_locations.end());
-  if(agent_location == wumpus_location || pits.find(agent_location)!=pits.end()){
-    
-    is_agent_dead=true;
+  pair<int, int> agent_location =make_pair(playableworld.agent_location.first-1,playableworld.agent_location.second-1);
+  Room room = playableworld.world.boxes.at(agent_location.second).at(agent_location.first);
+      if(room.has_wumpus()||room.has_pit()){
+              is_agent_dead=true;
 
-  }
+      }
+
 }
 
-vector<sensor> PlayGround::execute()
-{
-    pair<int, int> location=playableworld.get_agent_location();
-    
-    //if(action.turnleft) {playableworld.turn_left();}
-    //else if(action.turnright) { playableworld.turn_right(); }
-    
 
+vector<sensor> PlayGround::execute()
+{   
+    pair<int, int> location=playableworld.agent_location;
     if(action.move) { location = playableworld.move_forward(); }
     if(action.shoot) { playableworld.shoot(); }
+    kill_agent();
 
-
-    Room room = playableworld.world.boxes.at(location.first).at(location.second);
+    Room room = playableworld.world.boxes.at(location.second-1).at(location.first-1);
     vector<sensor> perception;
     if(room.get_breeze()) {
         Type type=Type::B;
@@ -83,6 +77,7 @@ vector<sensor> PlayGround::execute()
         Type type=Type::G;
         sensor s=sensor(location,type);
         perception.push_back(s);
+        is_gold_found=true;
     }
     if(room.has_pit()){
         Type type=Type::P;

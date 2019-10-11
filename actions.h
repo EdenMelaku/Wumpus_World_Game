@@ -15,9 +15,9 @@ public:
     bool turnright;
     bool shoot;
     bool move;
-    vector<int> turns;
+ 
     actions();
-    actions(bool turnleft, bool turnright, bool shoot, bool move, vector<int> turns);
+    actions(bool turnleft, bool turnright, bool shoot, bool move);
 };
 
 #endif //WUMPUS_WORLD_GAME_ACTIONS_H

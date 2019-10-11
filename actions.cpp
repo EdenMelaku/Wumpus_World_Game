@@ -11,12 +11,17 @@
 /*
  *
  */
-actions::actions() {;}
-actions::actions(bool turnleftt, bool turnrightt,bool shoott,bool movee, vector<int> turnss){
+actions::actions() {
+     turnleft =false;
+     turnright=false;
+     shoot=false;
+     move=false;
+     
+}
+actions::actions(bool turnleftt, bool turnrightt,bool shoott,bool movee){
      turnleft =turnleftt;
      turnright=turnrightt;
      shoot=shoott;
      move=movee;
-     turns=turnss;
     
     }

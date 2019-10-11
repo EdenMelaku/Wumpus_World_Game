@@ -25,12 +25,12 @@ World::World(int sizee)
 void World::init_empty_world()
 {
     int count = size;
-    for (int i = 0; i < count; i++)
+    for (int i = 1; i <=count; i++)
     {
         vector<Room> vecs;
-        for (int j = 0; j < count; j++)
+        for (int j = 1; j <= count; j++)
         {
-            Room common = Room(i, j);
+            Room common = Room(j, i);
             vecs.push_back(common);
         }
         boxes.push_back(vecs);

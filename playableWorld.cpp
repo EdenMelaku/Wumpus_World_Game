@@ -19,10 +19,10 @@ pair<int, int> playableWorld::get_agent_location()
 
 void playableWorld::set_agent_location(pair<int, int> agent_locationn)
 { 
-  if(world.is_valid_position(agent_location.first, agent_location.second)){ 
+  if(world.is_valid_position(agent_locationn.first, agent_locationn.second)){ 
     agent_location = agent_locationn;
   }else{cout<<"BUMP"<<endl;}
-  cout<<agent_location.first<<","<< agent_location.second<<endl;
+  cout<<agent_locationn.first<<","<< agent_locationn.second<<endl;
 
 }
 
@@ -37,94 +37,74 @@ void playableWorld::set_agent_direction(string agent_directionn)
 
 string playableWorld::turn_left()
 {
-  string agent_direction = get_agent_direction();
-  if( agent_direction == "top" ){
+  
     set_agent_direction("left");
-  }else if( agent_direction == "bottom" ){
-    set_agent_direction("right");
-  }else if( agent_direction == "left" ){
-    set_agent_direction("bottom");
-  }else{
-    set_agent_direction("top");
-  }
+  
   return get_agent_direction();
 }
 
 string playableWorld::turn_right()
 {
-  string agent_direction = get_agent_direction();
-  if( agent_direction == "top" ){
+ 
     set_agent_direction("right");
-  }else if( agent_direction == "bottom" ){
-    set_agent_direction("left");
-  }else if( agent_direction == "left" ){
-    set_agent_direction("top");
-  }else{
+  
+  return get_agent_direction();
+}
+
+string playableWorld::turn_down()
+{
+ 
     set_agent_direction("bottom");
-  }
+  
+  return get_agent_direction();
+}
+
+string playableWorld::turn_up()
+{
+ 
+    set_agent_direction("top");
+  
   return get_agent_direction();
 }
 
 // move left, right, top, bottom
-void playableWorld::move_left()
-{
-  pair<int, int> agent_location = get_agent_location();
-  pair<int, int> updated_agent_location;
-  if(agent_location.second == 0){
-    // if agent location is in the left edge
-    updated_agent_location.first = agent_location.first;
-    updated_agent_location.second = agent_location.second;
-  }else{
-    updated_agent_location.first = agent_location.first;
-    updated_agent_location.second = agent_location.second - 1;
-  }
-  set_agent_location(updated_agent_location);
-}
-
-void playableWorld::move_right()
-{
-  pair<int, int> agent_location = get_agent_location();
-  pair<int, int> updated_agent_location;
-  if(agent_location.second == 3){
-    // if agent location is in the right edge
-    updated_agent_location.first = agent_location.first;
-    updated_agent_location.second = agent_location.second;
-  }else{
-    updated_agent_location.first = agent_location.first;
-    updated_agent_location.second = agent_location.second + 1;
-  }
-  set_agent_location(updated_agent_location);
-}
-
 void playableWorld::move_down()
 {
-  pair<int, int> agent_location = get_agent_location();
-  pair<int, int> updated_agent_location;
-  if(agent_location.second == 2){
-    // if agent location is in the bottom edge
-    updated_agent_location.first = agent_location.first;
-    updated_agent_location.second = agent_location.second;
-  }else{
-    updated_agent_location.first = agent_location.first - 1;
-    updated_agent_location.second = agent_location.second;
+  if(agent_location.second != 1){
+  
+    pair<int,int> location=make_pair(agent_location.first, agent_location.second-1);
+    agent_location=location;
   }
-
-  set_agent_location(updated_agent_location);
 }
 
 void playableWorld::move_top()
 {
-  pair<int, int> agent_location = get_agent_location();
-  pair<int, int> updated_agent_location;
-  if(agent_location.first == 3){
-    // if agent location is in the left edge
-    updated_agent_location.first = agent_location.first;
-    updated_agent_location.second = agent_location.second;
-  }else{
-    updated_agent_location.first = agent_location.first + 1;
-    updated_agent_location.second = agent_location.second;
+  
+  if(agent_location.second != 4){
+    pair<int,int> location=make_pair(agent_location.first, agent_location.second+1);
+    agent_location=location;
   }
-  set_agent_location(updated_agent_location);
+}
+
+void playableWorld::move_left()
+{
+ 
+  if(agent_location.first != 1){
+    pair<int,int> location=make_pair(agent_location.first-1, agent_location.second);
+    agent_location=location;
+  }
+}
+
+void playableWorld::move_right()
+{
+  //pair<int, int> agent_location = get_agent_location();
+  pair<int, int> updated_agent_location;
+  if(agent_location.first != 4){
+    
+      pair<int,int> location=make_pair(agent_location.first+1, agent_location.second);
+      agent_location=location;
+       pl++;
+  }
 }
 
 // move forward or backward
@@ -140,23 +120,10 @@ pair<int, int> playableWorld::move_forward()
   }else{
     move_down();
   }
+ 
   return get_agent_location();
 }
 
-pair<int, int> playableWorld::move_backward()
-{
-  string agent_direction = get_agent_direction();
-  if( agent_direction == "left" ){
-    move_right();
-  }else if( agent_direction == "right"){
-    move_left();
-  }else if( agent_direction == "top"){
-    move_down();
-  }else{
-    move_top();
-  }
-  return get_agent_location();
-}
 
 bool playableWorld::is_wumpus_in_line_sight(pair<int, int> wumpus_location){
   pair<int, int> agent_location = get_agent_location();

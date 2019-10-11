@@ -5,15 +5,17 @@ using namespace std;
 class playableWorld
 {
 private:
-  pair<int, int> agent_location;
-  string agent_direction;
   int arrow;
 
  // PlayGround playground;
 
 public:
+   int pl=0;
   // the class constructor
     World world;
+      string agent_direction;
+
+  pair<int, int> agent_location;
 
   playableWorld(pair<int, int> agent_location, string agent_direction,World world);
   playableWorld();
@@ -28,6 +30,8 @@ public:
   // turn left or right from current agent direction
   string turn_left();
   string turn_right();
+   string turn_up();
+  string turn_down();
 
   // move left, right, down or top
   void move_left();
@@ -37,7 +41,6 @@ public:
 
   // move forward or backward
   pair<int, int> move_forward();
-  pair<int, int> move_backward();
 
   // check if wumpus is in line sight of the agent
   bool is_wumpus_in_line_sight(pair<int, int> wumpus_location);

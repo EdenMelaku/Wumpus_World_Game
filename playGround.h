@@ -19,7 +19,6 @@ class PlayGround
 {
 private:
     
-    pair<int, int> agentLocation;
     //vector<Sensor> infer(actions ac);
     //the current point of the player
     int point;
@@ -49,6 +48,7 @@ public:
     bool is_game_over();
     //vector<Sensor> infer(actions ac);
     void kill_agent();
+    void grub_gold();
     vector<sensor> execute();
 };
 #endif
