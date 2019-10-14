@@ -27,7 +27,7 @@ class Inference
     std::pair<int, int> find_possible_move(std::pair<int, int> current_room);
   public:
     Inference(KnowledgeBase kb);
-    DataStructures::Decision infer(std::pair<int, int> current_room);
+    DataStructures::Decision infer(std::pair<int, int> current_room, KnowledgeBase kb);
 };
 
 }

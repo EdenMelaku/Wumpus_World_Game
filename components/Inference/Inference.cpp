@@ -102,10 +102,12 @@ vector<pair<int, int>> Inference::get_adjacent_rooms(pair<int, int> current_room
  * @param  current_room [current room position in pair<int, int> format]
  * @return              [response which contain the infered action and an updated knowledgebase]
  */
-Decision Inference::infer(pair<int, int> current_room)
+Decision Inference::infer(pair<int, int> current_room, KnowledgeBase kb)
 {
   Decision d;
-  cout << "aha";
+    std::cout << kb.get_information_breeze(std::make_pair(1,1)) << std::endl;
+    std::cout << kb.get_information_bump(std::make_pair(1,1)) << std::endl;
+    std::cout << kb.get_information_stench(std::make_pair(1,1)) << std::endl;
   return d;
 }
 // Decision Inference::infer(pair<int, int> current_room)
