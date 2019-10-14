@@ -10,8 +10,8 @@ add_subdirectory(components/Inference)
 add_subdirectory(components/Actuator)
 add_subdirectory(agent/IntelligentAgent)
 
-set(iagent sth.cpp)
-add_executable(myagent ${iagent})
+set(iagent main.cpp)
+add_executable(wwia ${iagent})
 
-target_link_libraries(myagent IntelligentAgent_lib)
+target_link_libraries(wwia IntelligentAgent_lib)
 

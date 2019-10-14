@@ -14,7 +14,7 @@ class Sensor
         DataStructures::Knowledge percept_to_knowledge(DataStructures::Percepts perceptions);
     public:
         Sensor(KnowledgeBase kb);
-        void add_percept(std::pair<int, int> room, DataStructures::Percepts perceptions);
+        KnowledgeBase add_percept(std::pair<int, int> room, DataStructures::Percepts perceptions);
 };
      
 } 

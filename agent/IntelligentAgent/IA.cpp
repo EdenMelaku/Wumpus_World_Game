@@ -19,7 +19,18 @@ IntelligentAgent::IntelligentAgent(){
 // }
 
 void IntelligentAgent::go(){
-    std::cout << "going";
+    Percepts p;
+    p.breeze = true;
+    p.bump = true;
+    p.stench = true;
+
+    std::pair<int, int> r = std::make_pair(1, 1);
+    ia_kb = ia_sensor.add_percept(std::make_pair(1, 1), p);
+    Decision decision;
+    // decision = ia_inferer.infer();
+    std::cout << ia_kb.get_information_breeze(std::make_pair(1,1)) << std::endl;
+    std::cout << ia_kb.get_information_bump(std::make_pair(1,1)) << std::endl;
+    std::cout << ia_kb.get_information_stench(std::make_pair(1,1)) << std::endl;
 }
 
 }
