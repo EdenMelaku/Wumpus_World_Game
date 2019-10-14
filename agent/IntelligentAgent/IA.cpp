@@ -25,10 +25,10 @@ void IntelligentAgent::go(){
     p.stench = true;
 
     std::pair<int, int> r = std::make_pair(1, 1);
-    ia_kb = ia_sensor.add_percept(std::make_pair(1, 1), p);
+    ia_sensor.add_percept(std::make_pair(1, 1), p);
     Decision decision;
-    decision = ia_inferer.infer(std::make_pair(1,1), ia_kb);
+    decision = ia_inferer.infer(std::make_pair(1,1));
     
-}
+    }
 
 }
