@@ -1,4 +1,5 @@
 #include "KB.h"
+#include <iostream>
 
 
 namespace components{
@@ -25,7 +26,18 @@ using namespace DataStructures;
      */
     void KnowledgeBase::add_into_knowledgebase(std::pair<int,int> room, Knowledge knowledge)
     {
+        // std::cout << "----------------" << std::endl;
+        // std::cout << room.first << "," << room.second << std::endl;
+        // std::cout << "in kb, breeze: " << knowledge.breeze << std::endl;
+        // std::cout << "in kb, bump: " << knowledge.bump << std::endl;
+        // std::cout << "in kb, stench: " << knowledge.stench << std::endl;
+
         data[room] = knowledge;
+        
+        // std::cout << "after assignment, breeze: " << data[room].breeze << std::endl;
+        // std::cout << "after assignment, bump: " << data[room].bump << std::endl;
+        // std::cout << "after assignment, stench: " << data[room].stench << std::endl;
+        // std::cout << "-----------------" << std::endl;
     }
     /**
      * @brief Change room information
@@ -113,61 +125,73 @@ using namespace DataStructures;
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.stench = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
     void KnowledgeBase::change_information_breeze(std::pair<int, int> room, bool value)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.breeze = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
     void KnowledgeBase::change_information_glitter(std::pair<int, int> room, bool value)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.glitter = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
     void KnowledgeBase::change_information_bump(std::pair<int, int> room, bool value)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.bump = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
     void KnowledgeBase::change_information_scream(std::pair<int, int> room, bool value)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.scream = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
     void KnowledgeBase::change_information_possible_wumpus(std::pair<int, int> room, bool value)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.possible_wumpus = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
     void KnowledgeBase::change_information_wumpus(std::pair<int, int> room, bool value)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.wumpus = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
     void KnowledgeBase::change_information_possible_pit(std::pair<int, int> room, bool value)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.possible_pit = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
     void KnowledgeBase::change_information_pit(std::pair<int, int> room, bool value)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.pit = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
     void KnowledgeBase::change_information_gold(std::pair<int, int> room, bool value)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.gold = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
     void KnowledgeBase::change_information_ok(std::pair<int, int> room, bool value)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.ok = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
     void KnowledgeBase::change_information_visited(std::pair<int, int> room, bool value)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
         k.visited = value;
+        KnowledgeBase::add_into_knowledgebase(room, k);
     }
 
 }

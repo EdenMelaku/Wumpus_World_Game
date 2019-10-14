@@ -7,9 +7,9 @@ namespace components{
 using namespace DataStructures;
 using namespace std;
 
-Inference::Inference(KnowledgeBase current_kb)
+Inference::Inference(KnowledgeBase& kb) :current_kb(kb)
 {
-  Inference::current_kb = current_kb;
+  
 }
 
 /**
@@ -105,7 +105,6 @@ vector<pair<int, int>> Inference::get_adjacent_rooms(pair<int, int> current_room
 Decision Inference::infer(pair<int, int> current_room)
 {
   Decision d;
-  cout << "aha";
   return d;
 }
 // Decision Inference::infer(pair<int, int> current_room)

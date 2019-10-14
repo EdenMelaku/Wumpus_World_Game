@@ -1,4 +1,6 @@
 #include "Sensor.h"
+#include <iostream>
+
 
 namespace components{
 
@@ -9,9 +11,9 @@ using namespace DataStructures;
      * 
      * @param kb  KnowledgeBase that sensor will write to
      */
-    Sensor::Sensor(KnowledgeBase kb)
+    Sensor::Sensor(KnowledgeBase& kb): current_kb(kb)
     {
-        current_kb = kb;
+        
     }
     /**
      * @brief Converts obtained percepts to Knowledge
@@ -36,9 +38,11 @@ using namespace DataStructures;
      * @param room 
      * @param perceptions 
      */
-    void Sensor::add_percept(std::pair<int, int> room, Percepts perceptions)
+    KnowledgeBase Sensor::add_percept(std::pair<int, int> room, Percepts perceptions)
     {
         Knowledge information = Sensor::percept_to_knowledge(perceptions);
         current_kb.add_into_knowledgebase(room, information);
+
+        return current_kb;
     }
 }
