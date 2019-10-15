@@ -19,12 +19,15 @@ class Inference
   *
   */
   private:
-    std::vector<std::pair<int, int>> adjacent_rooms;
+    std::set<std::pair<int, int>> ok_rooms;
     std::pair<int, int> wumpus_room;
+    std::set<std::pair<int, int>> pit_rooms;
+
     KnowledgeBase& current_kb;
-    bool is_valid_position(int i, int j);
-    std::vector<std::pair<int, int>> get_adjacent_rooms(std::pair<int, int> current_room);
+
+    // std::vector<std::pair<int, int>> get_adjacent_rooms(std::pair<int, int> current_room);
     std::pair<int, int> find_possible_move(std::pair<int, int> current_room);
+    void rule_matching(std::pair<int, int> room);
   public:
     Inference(KnowledgeBase& kb);
     DataStructures::Decision infer(std::pair<int, int> current_room);
