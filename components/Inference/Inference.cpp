@@ -48,55 +48,6 @@ vector<pair<int, int>> Inference::get_adjacent_rooms(pair<int, int> current_room
 
   return adjacent_rooms;
 }
-
-/**
- * [Inference::find_possible_move find the possible move base on the knowledgebase of the rooms.]
- * @param current_room [current room position in pair<int, int> format]
- * @return [selected room in pair<int, int> format]
- */
-// pair<int, int> Inference::find_possible_move(pair<int, int> current_room)
-// {
-//   // todo - calculate_possible_move
-//   vector<pair<int, int>> adjacent_rooms = get_adjacent_rooms(current_room);
-//   map<pair<int, int>, Knowledge> data = current_kb.get_data();
-
-//   // possible move candidate base on their priorities
-//   vector<pair<int, int>> possible_move_candidates1;
-//   vector<pair<int, int>> possible_move_candidates2;
-//   vector<pair<int, int>> possible_move_candidates3;
-
-//   // possible move which hold on of the prior possible moves
-//   vector<pair<int, int>> possible_move_candidates;
-
-//   for(auto itr = adjacent_rooms.begin(); itr < adjacent_rooms.end(); itr++) {
-//     // if the adjacent room is ok and unvisited.
-//     if(current_kb.get_information_ok(*itr) && !current_kb.get_information_visited(*itr)) {
-//       possible_move_candidates1.push_back(*itr);
-//     // if the adjacent room is ok and visited.
-//     }else if(current_kb.get_information_ok(*itr) && current_kb.get_information_visited(*itr)) {
-//       possible_move_candidates2.push_back(*itr);
-//     }else {
-//       possible_move_candidates3.push_back(*itr);
-//     }
-//   }
-
-//   // assign possible_moves
-//   if(possible_move_candidates1.size() > 0){
-//     possible_move_candidates = possible_move_candidates1;
-//   }else if(possible_move_candidates2.size() > 0){
-//     possible_move_candidates = possible_move_candidates2;
-//   }else{
-//     possible_move_candidates = possible_move_candidates3;
-//   }
-
-//   // fix the random number generator.
-//   srand((int)time(0));
-//   int random_number = rand()%possible_move_candidates.size();
-//   pair<int, int> selected_room = possible_move_candidates[random_number];
-
-//   return selected_room;
-// }
-
 /**
  * [Inference::infer infer response from the given knowledgebase]
  * @param  current_room [current room position in pair<int, int> format]
@@ -106,7 +57,12 @@ Decision Inference::infer(pair<int, int> current_room)
 {
   Decision d;
 
-  
+  // model: <room> bool value, <room> bool value, <room> bool value
+  // model: wumpus: <room> boolvalue stench
+  //        pit <room> boolvalue breeze
+  // the inference will take current_room and infer wumpus, infer pit, infer okay. All three will have different models
+  // then return detections to Actuator, which will possibly give suggestions on next step to take, i.e Decision
+  std::set<std::pair<int, int>, bool> model;
 
   return d;
 }
