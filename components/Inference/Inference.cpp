@@ -99,9 +99,36 @@ Decision Inference::infer(std::pair<int, int> current_room)
   rule_matching(current_room);
   return d;
 }
+// enum class constraintType{
+//   wumpus,
+//   breeze,
+//   stench,
+//   glitter,
+//   pit
+// };
+// struct constraint{
+//     bool constra = false,
+//     pit = false
+// };
+std::set<std::pair<int,int>, DataStructures::constraint> generateModel(DataStructures::constraint rule_constraint){
+    std::set<std::pair<int,int>, DataStructures::constraint> constraint;
 
+}
+/**
+ * @brief Checks the equivalence of contraints of the model with the data stored in the knowledgebase
+ * 
+ * @param room Room that the constraint will be checked against
+ * @param constraint Constraint that will be checked for validity in the knowlegebase
+ * @return true Specified constraint is in congruity with data stored in the knowledgebase
+ * @return false Specified constraint is not in conngruity with data stored in the knowledgebase
+ */
+bool Inference::check_equivalence(std::pair<int, int> room, DataStructures::constraint constraint){
+    return current_kb.get_specific_percept_info(room, constraint) == 
+}
 bool infer_wumpus(std::pair<int, int> room){
-    
+    // PH(position, value) == Rule(position, value)
+    std::set<bool> constraints;
+    // constraints std::make_pair(room.first+1, room.second)
     return true;
 }
 

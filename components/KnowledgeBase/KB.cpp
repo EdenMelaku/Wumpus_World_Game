@@ -60,6 +60,17 @@ using namespace DataStructures;
         return data[room];
     }
 
+    bool KnowledgeBase::get_specific_percept_info(std::pair<int, int> room, DataStructures::constraint specific_knowledge){
+        if(specific_knowledge == DataStructures::constraint::breeze) return KnowledgeBase::get_information_breeze(room);
+        else if(specific_knowledge == DataStructures::constraint::bump) return KnowledgeBase::get_information_bump(room);
+        else if(specific_knowledge == DataStructures::constraint::glitter) return KnowledgeBase::get_information_glitter(room);
+        else if(specific_knowledge == DataStructures::constraint::pit) return KnowledgeBase::get_information_pit(room);
+        else if(specific_knowledge == DataStructures::constraint::scream) return KnowledgeBase::get_information_scream(room);
+        else if(specific_knowledge == DataStructures::constraint::stench) return KnowledgeBase::get_information_stench(room);
+        else if(specific_knowledge == DataStructures::constraint::wumpus) return KnowledgeBase::get_information_wumpus(room);
+        else return false;
+    }
+
     bool KnowledgeBase::get_information_stench(std::pair<int, int> room)
     {
         Knowledge k = KnowledgeBase::get_room_information(room);
