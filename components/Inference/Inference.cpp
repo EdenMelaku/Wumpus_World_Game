@@ -123,7 +123,7 @@ std::set<std::pair<int,int>, DataStructures::constraint> generateModel(DataStruc
  * @return false Specified constraint is not in conngruity with data stored in the knowledgebase
  */
 bool Inference::check_equivalence(std::pair<int, int> room, DataStructures::constraint constraint){
-    return current_kb.get_specific_percept_info(room, constraint) == 
+    // return current_kb.get_specific_percept_info(room, constraint) == Model::
 }
 bool infer_wumpus(std::pair<int, int> room){
     // PH(position, value) == Rule(position, value)
