@@ -6,24 +6,22 @@
 #include "DataStructures.h"
 
 
-
 namespace DataStructures{
 
+    typedef std::pair<int, int> Room;
+    typedef std::map<Room, DataStructures::Percepts> model;
     enum class Rule{
         Wumpus,
         Pit
     };
-    typedef std::pair<int, int> Room;
-    typedef std::map<Room, DataStructures::Percepts> model;
-
+    
     class Model{
 
-    // std::set<std::pair<int, int>, bool> conclusion;
-
-    // Wumpus:
     public:
-        bool get_specific_percept_info(std::pair<int, int> room, DataStructures::constraint);
-        model generate_model(Room room, Rule rule);
+        static bool get_specific_percept_info(std::pair<int, int> room, DataStructures::constraint, model);
+        static model generate_model(Room room, Rule rule);
+    
     };
 }
+
 #endif

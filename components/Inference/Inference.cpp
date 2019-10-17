@@ -4,7 +4,7 @@
 
 namespace components{
 
-using namespace DataStructures;
+// using namespace DataStructures;
 
 /**
  * @brief Construct a new Inference:: Inference object
@@ -13,7 +13,7 @@ using namespace DataStructures;
  */
 Inference::Inference(KnowledgeBase& kb) :current_kb(kb)
 {
-  
+
 }
 
 /**
@@ -53,13 +53,40 @@ std::set<std::pair<int, int>> get_adjacent_rooms(std::pair<int, int> room)
     return adjacent_rooms;
 }
 /**
+ * @brief rule matching function that will incorporate infered conclusions into knowledgebase as well as pass on conclusion for next action
+ * 
+ * @param room 
+ */
+void Inference::rule_matching(std::pair<int, int> room){
+  std::set<std::pair<int, int>> adjacentRooms = get_adjacent_rooms(room);
+  for (auto adj : adjacentRooms){
+
+    bool wumpus = infer_presence(adj, DataStructures::Rule::Wumpus);
+    bool pit = infer_presence(adj, DataStructures::Rule::Pit);
+
+    if(wumpus){
+        current_kb.change_information_wumpus(adj, true); // update knowledgebase
+//       Decision d;
+//       d.shoot_at = adj;
+//       // return d;
+    }
+
+    if(pit){
+        current_kb.change_information_pit(adj, true); // update knowledgebase
+        pit_rooms.insert(adj);
+    }
+
+    if(!wumpus && !pit) ok_rooms.insert(adj);
+  }
+}
+/**
  * [Inference::infer infer response from the given knowledgebase]
  * @param  current_room [current room position in pair<int, int> format]
  * @return              [response which contain the infered action and an updated knowledgebase]
  */
-Decision Inference::infer(std::pair<int, int> current_room)
+DataStructures::Decision Inference::infer(std::pair<int, int> current_room)
 {
-  Decision d;
+  DataStructures::Decision d;
 
   // model: <room> bool value, <room> bool value, <room> bool value
   // model: wumpus: <room> boolvalue stench
@@ -110,10 +137,6 @@ Decision Inference::infer(std::pair<int, int> current_room)
 //     bool constra = false,
 //     pit = false
 // };
-std::set<std::pair<int,int>, DataStructures::constraint> generateModel(DataStructures::constraint rule_constraint){
-    std::set<std::pair<int,int>, DataStructures::constraint> constraint;
-
-}
 /**
  * @brief Checks the equivalence of contraints of the model with the data stored in the knowledgebase
  * 
@@ -122,43 +145,45 @@ std::set<std::pair<int,int>, DataStructures::constraint> generateModel(DataStruc
  * @return true Specified constraint is in congruity with data stored in the knowledgebase
  * @return false Specified constraint is not in conngruity with data stored in the knowledgebase
  */
-bool Inference::check_equivalence(std::pair<int, int> room, DataStructures::constraint constraint){
+bool Inference::check_equivalence(std::pair<int, int> room, DataStructures::constraint specific_constraint, DataStructures::model specified_model){
     // return current_kb.get_specific_percept_info(room, constraint) == Model::
+    current_kb.get_specific_percept_info(room, specific_constraint) == DataStructures::Model::get_specific_percept_info(room, specific_constraint, specified_model);
+    return true;
 }
-bool infer_wumpus(std::pair<int, int> room){
+/**
+ * @brief Infers the presence of a character such as a wumpus or pit in a room
+ * 
+ * @param room The room from which will be inferred character exists in it or not.
+ * @param character The game character which will be checked for existence.
+ * @return true The character exists in the room.
+ * @return false The character does not exist in the room.
+ */
+bool Inference::infer_presence(std::pair<int, int> room, DataStructures::Rule character){
+    
     // PH(position, value) == Rule(position, value)
-    std::set<bool> constraints;
-    // constraints std::make_pair(room.first+1, room.second)
-    return true;
-}
 
-bool infer_pit(std::pair<int, int> room){
+    DataStructures::model inference_model;
+    DataStructures::constraint constraint;
+    bool conclusion = false;
+    int counter = 0;
 
-    return true;
-}
-
-void Inference::rule_matching(std::pair<int, int> room){
-  std::set<std::pair<int, int>> adjacentRooms = get_adjacent_rooms(room);
-  for (auto adj : adjacentRooms){
-
-    bool wumpus = infer_wumpus(adj);
-    bool pit = infer_pit(adj);
-
-    if(wumpus){
-        current_kb.change_information_wumpus(adj, true); // update knowledgebase
-//       Decision d;
-//       d.shoot_at = adj;
-//       // return d;
+    if (character == DataStructures::Rule::Wumpus){
+      inference_model = DataStructures::Model::generate_model(room, DataStructures::Rule::Wumpus);
+      constraint = DataStructures::constraint::stench;
+    }
+    else if (character == DataStructures::Rule::Pit){
+      inference_model = DataStructures::Model::generate_model(room, DataStructures::Rule::Pit);
+      constraint = DataStructures::constraint::breeze;
+    }
+    
+    for (auto rule : inference_model){
+      std::cout << rule.first.first << "," << rule.first.second << std::endl;
+      std::pair<int, int> model_room = std::make_pair(rule.first.first,rule.first.second);
+      
+      conclusion = check_equivalence(model_room, constraint, inference_model);
     }
 
-    if(pit){
-        current_kb.change_information_pit(adj, true); // update knowledgebase
-        pit_rooms.insert(adj);
-    }
-
-    if(!wumpus && !pit) ok_rooms.insert(adj);
-  
-  }
+    return true;
 }
 
 
