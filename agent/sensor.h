@@ -1,6 +1,6 @@
 #ifndef SENSOR_H
 #define SENSOR_H
-
+#include <tuple>
 
 using namespace std;
 
