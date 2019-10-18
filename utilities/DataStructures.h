@@ -32,6 +32,17 @@ namespace DataStructures{
         bool wumpus = false;
     };
 
+    enum constraint
+    {
+        stench,
+        breeze,
+        glitter,
+        bump,
+        scream,
+        wumpus,
+        pit
+    };
+
     struct Decision{
       std::pair<int, int> move_to;
       std::pair<int, int> shoot_at;
