@@ -28,6 +28,8 @@ class KnowledgeBase
         void add_into_knowledgebase(std::pair<int, int> room, DataStructures::Knowledge knowledge);
         void change_room_information(std::pair<int, int> room, DataStructures::Knowledge knowledge);
 
+        bool get_specific_percept_info(std::pair<int, int> room, DataStructures::constraint);
+
         // knowledge value getter methods
         bool get_information_stench(std::pair<int, int> room);
         bool get_information_breeze(std::pair<int, int> room);

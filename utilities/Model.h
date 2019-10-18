@@ -2,17 +2,26 @@
 #define MODEL_H
 
 #include <tuple>
-#include <set>
+#include <map>
+#include "DataStructures.h"
 
 
-namespace Model{
+namespace DataStructures{
 
+    typedef std::pair<int, int> Room;
+    typedef std::map<Room, DataStructures::Percepts> model;
     enum class Rule{
         Wumpus,
         Pit
     };
-    std::set<std::pair<int, int>, bool> conclusion;
+    
+    class Model{
 
-
+    public:
+        static bool get_specific_constraint_info(std::pair<int, int> room, DataStructures::constraint specified_constraint, DataStructures::model specified_model);
+        static model generate_model(Room room, Rule rule);
+    
+    };
 }
+
 #endif

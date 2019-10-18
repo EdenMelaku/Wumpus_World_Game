@@ -6,6 +6,7 @@
 #include <vector>
 #include "../KnowledgeBase/KB.h"
 #include "../../utilities/DataStructures.h"
+#include "../../utilities/Model.h"
 
 
 namespace components{
@@ -25,7 +26,8 @@ class Inference
 
     KnowledgeBase& current_kb;
 
-    // std::vector<std::pair<int, int>> get_adjacent_rooms(std::pair<int, int> current_room);
+    bool check_equivalence(std::pair<int, int> room, DataStructures::constraint specific_constraint, DataStructures::model specified_model);
+    bool infer_presence(std::pair<int, int> room, DataStructures::Rule character);
     std::pair<int, int> find_possible_move(std::pair<int, int> current_room);
     void rule_matching(std::pair<int, int> room);
   public:
