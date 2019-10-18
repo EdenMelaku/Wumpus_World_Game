@@ -13,7 +13,9 @@ creating a playable environment is the main task of this module
 #include "sensor.h"
 #include "actions.h"
 #include "playableWorld.h"
+#include "utilities/DataStructures.h"
 using namespace std;
+using namespace DataStructures;
 
 class PlayGround
 {
@@ -25,7 +27,9 @@ private:
     bool move;
     bool shoot;
 
+
 public:
+    Percepts p;
    bool is_wumpus_dead;
     bool is_agent_dead;
     bool is_gold_found;
@@ -50,5 +54,7 @@ public:
     void kill_agent();
     void grub_gold();
     vector<sensor> execute();
+        vector<sensor> get_initial_perception();
+
 };
 #endif

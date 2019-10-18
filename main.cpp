@@ -173,9 +173,9 @@ int main()
         
 
         // printUI();
-        vector<bool> arguments = {false, false, false, false};
+        //vector<bool> arguments = {false, false, false, false};
         vector<int> numOf_turns = {0, 0};
-        actions ac = actions(arguments.at(0), arguments.at(1), arguments.at(2), arguments.at(3), numOf_turns);
+        actions ac = actions();
 
         int ch = getch();
         switch (ch)
@@ -191,7 +191,7 @@ int main()
 
             pg.changeDir("left");
             pg.playableworld.turn_left();
-            printw("/n",pg.playableworld.get_agent_direction());
+            //printw("/n",pg.playableworld.get_agent_direction());
             ac.turnleft = true;
             numOf_turns.at(0)++;
 
@@ -201,7 +201,7 @@ int main()
 
             pg.changeDir("right");
             pg.playableworld.turn_right();
-            printw("/n",pg.playableworld.get_agent_direction());
+            //printw("/n",pg.playableworld.get_agent_direction());
             ac.turnright = true;
             numOf_turns.at(1)++;
             break;
@@ -210,7 +210,7 @@ int main()
 
             pg.changeDir("up");
             pg.playableworld.turn_up();
-            printw("/n",pg.playableworld.get_agent_direction());
+           // printw("/n",pg.playableworld.get_agent_direction());
             ac.turnleft = true;
             numOf_turns.at(0)++;
 
@@ -220,7 +220,7 @@ int main()
 
             pg.changeDir("down");
             pg.playableworld.turn_down();
-            printw("/n",pg.playableworld.get_agent_direction());
+           // printw("/n",pg.playableworld.get_agent_direction());
             ac.turnright = true;
             numOf_turns.at(1)++;
             break;

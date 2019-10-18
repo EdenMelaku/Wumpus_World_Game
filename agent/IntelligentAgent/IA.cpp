@@ -28,7 +28,7 @@ void IntelligentAgent::go(){
     
     ia_sensor.add_percept(std::make_pair(1, 1), p);
     
-    Decision decision;
+
     decision = ia_inferer.infer(r);
     
     }
