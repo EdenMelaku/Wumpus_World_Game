@@ -18,7 +18,7 @@ namespace DataStructures{
     class Model{
 
     public:
-        static bool get_specific_percept_info(std::pair<int, int> room, DataStructures::constraint, model);
+        static bool get_specific_constraint_info(std::pair<int, int> room, DataStructures::constraint specified_constraint, DataStructures::model specified_model);
         static model generate_model(Room room, Rule rule);
     
     };
