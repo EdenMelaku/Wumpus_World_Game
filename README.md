@@ -22,7 +22,7 @@ mkdir build
 cd build
 cmake ..
 make
-./wwia
+./iaww
 ```
 
 ## Running the tests
