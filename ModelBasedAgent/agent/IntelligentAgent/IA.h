@@ -10,7 +10,7 @@
 namespace agent{
 
 using namespace DataStructures;
-
+using namespace components;
 class IntelligentAgent
 {
     

@@ -7,6 +7,7 @@ g++ --std=c++11 -o sample3 Room.cpp World.cpp playableWorld.cpp sensor.cpp actio
 #include <iostream>
 #include <curses.h>
 #include <ncurses.h>
+#include <string.h>
 #include <thread>
 #include <chrono>
 #include <iomanip>
@@ -46,12 +47,19 @@ void ClearScreen()
 void printUI()
 {
     pair<int, int> location = pg.playableworld.agent_location;
+    int b=9;
+    ostringstream values;
     Room room = pg.playableworld.world.boxes.at(location.first - 1).at(location.second - 1);
-    ui = ui + to_string(pg.playableworld.pl) + "\n";
-    ui = ui + to_string(room.get_breeze()) + " " + to_string(room.get_stench()) + " " + to_string(room.has_pit()) + " " + to_string(room.has_wumpus());
+    values<<pg.playableworld.pl;
+    ui = ui + values.str() + "\n";
+
     ui = ui + "your direction= " + pg.playableworld.get_agent_direction() + "\n";
-    ui = ui + "arrow left= " + to_string(pg.arrow) + "\n";
-    ui = ui + "location= " + to_string(pg.playableworld.agent_location.second) + "," + to_string(pg.playableworld.agent_location.first) + "\n";
+    values<<pg.arrow;
+    ui = ui + "arrow left= " + values.str() + "\n";
+    values<<pg.playableworld.agent_location.second;
+    ui = ui + "location= " + values.str() + ",";
+    values<<pg.playableworld.agent_location.first;
+    ui=ui+ values.str() + "\n";
 
     vector<vector<Room>>::reverse_iterator iter;
     int i = 0;
@@ -120,9 +128,10 @@ void printUI()
             {
                 s = s + " ";
             }
-
-            string x = to_string(r.getLocation().first);
-            string y = to_string(r.getLocation().second);
+            values<<r.getLocation().first;
+            string x = values.str();
+            values<<r.getLocation().second;
+            string y = values.str();
             // cout << setw(3) <<y<< setw(3) << "," << setw(3) << x<< setw(3) << s << setw(3) << "|";
             ui = ui + " " + y + "," + x + " " + s + "|";
             j++;
@@ -143,24 +152,24 @@ void printUI()
 }
   actions decision_to_action(DataStructures::Decision decision){
     pair<int,int> target_location;
-    actions action=actions;
-    if(decision.move_to){
-        target_location={decision.move_to.first,decision.move_to.second};
-        action.move=true;
+    actions action=actions();
+    target_location=make_pair(decision.location.first, decision.location.second);
 
+      if(decision.decision== DataStructures::movement_decision::move_to){
+        action.move=true;
     }
     else{
         action.shoot=true;
     }
- if(target_location.first==pg.playableWorld.agent_location.first){
-     if(target_location.second>pg.playableWorld.agent_location.second){
+ if(target_location.first==pg.playableworld.agent_location.first){
+     if(target_location.second>pg.playableworld.agent_location.second){
             pg.playableworld.turn_up();
      }
      else{
          pg.playableworld.turn_down();
      }
  }
- else if(target_location.first>pg.playableWorld.agent_location.first){
+ else if(target_location.first>pg.playableworld.agent_location.first){
      pg.playableworld.turn_right();
  }
  else{
@@ -196,9 +205,9 @@ void agent_player()
         pg.visiblity.push_back(vis);
     }
     int i = 0;
-    agent::IntelligentAgent intelligentAgent= agent::IntelligentAgent::IntelligentAgent();
+    agent::IntelligentAgent intelligentAgent= agent::IntelligentAgent();
 
-    sensor sensor=pg.get_initial_perception();
+    vector<sensor> sensor=pg.get_initial_perception();
     DataStructures::Decision decision=intelligentAgent.go(pg.playableworld.agent_location, pg.p);
 
     while (!pg.is_game_over())

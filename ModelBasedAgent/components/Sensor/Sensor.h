@@ -1,4 +1,4 @@
-#ifndef SENSOR_H
+#ifdef SENSOR_H
 #define SENSOR_H
 
 #include "../KnowledgeBase/KB.h"
