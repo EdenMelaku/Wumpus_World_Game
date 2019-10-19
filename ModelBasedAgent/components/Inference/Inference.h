@@ -20,16 +20,16 @@ class Inference
   *
   */
   private:
-    std::set<std::pair<int, int>> ok_rooms;
+    std::vector<std::pair<int, int>> ok_rooms;
     std::pair<int, int> wumpus_room;
-    std::set<std::pair<int, int>> pit_rooms;
+    std::vector<std::pair<int, int>> pit_rooms;
 
     KnowledgeBase& current_kb;
 
     bool check_equivalence(std::pair<int, int> room, DataStructures::constraint specific_constraint, DataStructures::model specified_model);
     bool infer_presence(std::pair<int, int> room, DataStructures::Rule character);
     std::pair<int, int> find_possible_move(std::pair<int, int> current_room);
-    void rule_matching(std::pair<int, int> room);
+    DataStructures::Decision rule_matching(std::pair<int, int> room);
   public:
     Inference(KnowledgeBase& kb);
     DataStructures::Decision infer(std::pair<int, int> current_room);
