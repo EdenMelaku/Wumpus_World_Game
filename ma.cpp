@@ -215,8 +215,8 @@ void agent_player()
     {   printUI();
         chrono::milliseconds timespan(1000); 
         this_thread::sleep_for(timespan);
+        intelligentAgent.go(pg.playableworld.agent_location,pg.p);
         decision=intelligentAgent.decision;
-
         actions action=decision_to_action(decision);
         pg.action=action;
         pg.execute();
