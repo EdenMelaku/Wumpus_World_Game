@@ -2,7 +2,7 @@
 g++ --std=c++11 -o sample3 Room.cpp World.cpp playableWorld.cpp sensor.cpp actions.cpp playGround.cpp main.cpp -lncurses
 
 */
-#include "playGround.h"
+#include "Game/playGround.h"
 #include "ModelBasedAgent/agent/IntelligentAgent/IA.h"
 #include <iostream>
 #include <curses.h>
@@ -14,6 +14,7 @@ g++ --std=c++11 -o sample3 Room.cpp World.cpp playableWorld.cpp sensor.cpp actio
 
 
 using namespace std;
+//using namespace agent;
 
 int size;
 string player;
@@ -61,7 +62,7 @@ void printUI()
     values<<pg.playableworld.agent_location.first;
     ui=ui+ values.str() + "\n";
 
-    vector<vector<Room>>::reverse_iterator iter;
+    vector<vector<Room> >::reverse_iterator iter;
     int i = 0;
     int r = 3;
 
@@ -191,6 +192,7 @@ void agent_player()
 
     playableWorld playableworld = playableWorld(make_pair(1, 1), "top", world);
     pg = PlayGround(player, playableworld);
+    agent::IntelligentAgent intelligentAgent=agent::IntelligentAgent();
 
 
 
@@ -205,7 +207,6 @@ void agent_player()
         pg.visiblity.push_back(vis);
     }
     int i = 0;
-    agent::IntelligentAgent intelligentAgent= agent::IntelligentAgent();
 
     vector<sensor> sensor=pg.get_initial_perception();
     DataStructures::Decision decision=intelligentAgent.go(pg.playableworld.agent_location, pg.p);
