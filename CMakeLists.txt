@@ -3,15 +3,11 @@ project (IntelligentAgent-WumpusWorld)
 
 # set(CMAKE_CXX_STANDARD 14)
 
-add_subdirectory(utilities)
-add_subdirectory(components/KnowledgeBase)
-add_subdirectory(components/Sensor)
-add_subdirectory(components/Inference)
-add_subdirectory(components/Actuator)
-add_subdirectory(agent/IntelligentAgent)
+add_subdirectory(Game)
+#add_subdirectory(ModelBasedAgent)
 
-set(iagent main.cpp)
-add_executable(iaww ${iagent})
+set(ww ma.cpp)
+add_executable(wumpusworld ${ww})
 
-target_link_libraries(iaww IntelligentAgent_lib)
+target_link_libraries(wumpusworld Game_lib)
 

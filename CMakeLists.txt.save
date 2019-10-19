@@ -1,9 +1,0 @@
-cmake_minimum_required(VERSION 3.10)
-project(IntelligentAgent-WumpusWorld)
-
-set(CMAKE_CXX_STANDARD 14)
-
-include_directories(components/Sensor)
-components/Actuator/Actuator_BACKUP_11351.cpp components/Actuator/Actuator_BACKUP_11472.cpp components/Actuator/Actuator_BACKUP_11554.cpp components/Actuator/Actuator_BACKUP_11668.cpp components/Actuator/Actuator_BACKUP_11758.cpp components/Actuator/Actuator_BACKUP_11839.cpp components/Actuator/Actuator_BACKUP_12147.cpp components/Actuator/Actuator_BASE_11268.cpp components/Actuator/Actuator_BASE_11351.cpp components/Actuator/Actuator_BASE_11472.cpp components/Actuator/Actuator_BASE_11554.cpp components/Actuator/Actuator_BASE_11668.cpp components/Actuator/Actuator_BASE_11758.cpp components/Actuator/Actuator_BASE_11839.cpp components/Actuator/Actuator_BASE_12147.cpp components/Actuator/Actuator_LOCAL_11268.cpp components/Actuator/Actuator_LOCAL_11351.cpp components/Actuator/Actuator_LOCAL_11472.cpp components/Actuator/Actuator_LOCAL_11554.cpp components/Actuator/Actuator_LOCAL_11668.cpp components/Actuator/Actuator_LOCAL_11758.cpp components/Actuator/Actuator_LOCAL_11839.cpp components/Actuator/Actuator_LOCAL_12147.cpp components/Actuator/Actuator_REMOTE_11268.cpp components/Actuator/Actuator_REMOTE_11351.cpp components/Actuator/Actuator_REMOTE_11472.cpp components/Actuator/Actuator_REMOTE_11554.cpp components/Actuator/Actuator_REMOTE_11758.cpp components/Actuator/Actuator_REMOTE_11839.cpp components/Actuator/Actuator_REMOTE_12147.cpp components/Inference/Inference.cpp.orig components/Inference/Inference_BACKUP_1057.cpp components/Inference/Inference_BASE_1057.cpp components/Inference/Inference_LOCAL_1057.cpp components/Inference/Inference_REMOTE_1057.cpp components/KnowledgeBase/KB.cpp.orig components/KnowledgeBase/KB.h.orig
-
-include_directories(components/Actuator)

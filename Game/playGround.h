@@ -13,9 +13,10 @@ creating a playable environment is the main task of this module
 #include "sensor.h"
 #include "actions.h"
 #include "playableWorld.h"
-#include "utilities/DataStructures.h"
+#include "../ModelBasedAgent/utilities/DataStructures.h"
+
+
 using namespace std;
-using namespace DataStructures;
 
 class PlayGround
 {
@@ -29,8 +30,8 @@ private:
 
 
 public:
-    Percepts p;
-   bool is_wumpus_dead;
+    DataStructures::Percepts p;
+    bool is_wumpus_dead;
     bool is_agent_dead;
     bool is_gold_found;
     actions action;

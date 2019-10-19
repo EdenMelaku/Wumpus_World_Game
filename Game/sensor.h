@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 enum class Type
 {
 

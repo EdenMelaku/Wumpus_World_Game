@@ -3,7 +3,7 @@ g++ --std=c++11 -o sample3 Room.cpp World.cpp playableWorld.cpp sensor.cpp actio
 
 */
 #include "playGround.h"
-#include "agent/IntelligentAgent/IA.h"
+#include "ModelBasedAgent/agent/IntelligentAgent/IA.h"
 #include <iostream>
 #include <curses.h>
 #include <ncurses.h>
@@ -11,7 +11,9 @@ g++ --std=c++11 -o sample3 Room.cpp World.cpp playableWorld.cpp sensor.cpp actio
 #include <chrono>
 #include <iomanip>
 
+
 using namespace std;
+
 int size;
 string player;
 PlayGround pg;
@@ -139,7 +141,7 @@ void printUI()
     printw(disp);
     ClearScreen();
 }
-  actions decision_to_action(Decision decision){
+  actions decision_to_action(DataStructures::Decision decision){
     pair<int,int> target_location;
     actions action=actions;
     if(decision.move_to){
@@ -196,8 +198,8 @@ void agent_player()
     int i = 0;
     agent::IntelligentAgent intelligentAgent= agent::IntelligentAgent::IntelligentAgent();
 
-    Sensor sensor=pg.get_initial_perception();
-    Decision decision=intelligentAgent.go(pg.p);
+    sensor sensor=pg.get_initial_perception();
+    DataStructures::Decision decision=intelligentAgent.go(pg.playableworld.agent_location, pg.p);
 
     while (!pg.is_game_over())
     {   printUI();
