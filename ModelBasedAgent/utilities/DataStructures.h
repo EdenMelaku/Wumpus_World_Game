@@ -43,9 +43,13 @@ namespace DataStructures{
         pit
     };
 
+    enum movement_decision{
+        move_to,
+        shoot_at
+    };
     struct Decision{
-      std::pair<int, int> move_to;
-      std::pair<int, int> shoot_at;
+      movement_decision decision;
+      std::pair<int, int> location;
     };
 
 }

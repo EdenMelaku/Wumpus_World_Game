@@ -97,8 +97,7 @@ DataStructures::Decision Inference::infer(std::pair<int, int> current_room)
   // get_adjacent_rooms(make_pair(3,3));
   // get_adjacent_rooms(make_pair(-1,-1));
   // get_adjacent_rooms(make_pair(4,4));
-  rule_matching(current_room);
-  return d;
+  return rule_matching(current_room);
 }
 
 /**
@@ -106,11 +105,13 @@ DataStructures::Decision Inference::infer(std::pair<int, int> current_room)
  * 
  * @param room 
  */
-void Inference::rule_matching(std::pair<int, int> room){
+DataStructures::Decision Inference::rule_matching(std::pair<int, int> room){
 
   std::set<std::pair<int, int>> adjacentRooms = get_adjacent_rooms(room);
   std::cout << "Agent in: " << room.first << "," << room.second << std::endl;
   
+  DataStructures::Decision d;
+
   for (auto adj : adjacentRooms){
     
     // check adjacent rooms for existence of wumpus or pit to figure out an ok room to move to
@@ -124,25 +125,37 @@ void Inference::rule_matching(std::pair<int, int> room){
 
     if(wumpus){
         std::cout << "wumpus detected" << std::endl;
+        
         current_kb.change_information_wumpus(adj, true); // update knowledgebase
-//       Decision d;
-//       d.shoot_at = adj;
-//       // return d;
+        
+        d.decision = DataStructures::movement_decision::shoot_at;
+        d.location = adj;
+        
     }
 
     if(pit){
         std::cout << "pit detected" << std::endl;
+        
         current_kb.change_information_pit(adj, true); // update knowledgebase
-        pit_rooms.insert(adj);
+        pit_rooms.push_back(adj);
+        
+        d.decision = DataStructures::movement_decision::move_to;
+        d.location = ok_rooms.back();
+        
     }
 
     if(!wumpus && !pit){
         std::cout << "room is ok" << std::endl;
+        
         current_kb.change_information_ok(adj, true); // update knowledgebase
-        ok_rooms.insert(adj);
+        ok_rooms.push_back(adj);
+
+        d.decision = DataStructures::movement_decision::move_to;
+        d.location = ok_rooms.back();
+        
     }
   }
-
+  return d;
 }
 
 /**
