@@ -1,10 +1,10 @@
 #ifndef IA_H
 #define IA_H
 
-#include "../../components/KnowledgeBase/KB.h"
-#include "../../components/Sensor/Sensor.h"
-#include "../../components/Inference/Inference.h"
-#include "../../components/Actuator/Actuator.h"
+#include "../components/KnowledgeBase/KB.h"
+#include "../components/Sensor/Sensor.h"
+#include "../components/Inference/Inference.h"
+#include "../components/Actuator/Actuator.h"
 
 
 namespace agent{

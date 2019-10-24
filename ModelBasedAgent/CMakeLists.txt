@@ -8,8 +8,8 @@ add_subdirectory(components/KnowledgeBase)
 add_subdirectory(components/Sensor)
 add_subdirectory(components/Inference)
 add_subdirectory(components/Actuator)
-add_subdirectory(agent/IntelligentAgent)
+add_subdirectory(IntelligentAgent)
 
-add_library(iaww STATIC)
-target_link_libraries(iaww IntelligentAgent_lib)
+add_library(iaww INTERFACE)
+target_link_libraries(iaww INTERFACE IntelligentAgent_lib)
 

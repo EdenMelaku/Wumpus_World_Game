@@ -1,0 +1,2 @@
+/usr/bin/ar qc libIntelligentAgent_lib.a  CMakeFiles/IntelligentAgent_lib.dir/IA.cpp.o
+/usr/bin/ranlib libIntelligentAgent_lib.a

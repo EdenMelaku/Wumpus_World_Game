@@ -1,3 +1,5 @@
+#project(IntelligentAgent-IntelligentAgent)
+cmake_minimum_required (VERSION 3.10)
 
 add_library(IntelligentAgent_lib STATIC IA.cpp IA.h)
 target_link_libraries(IntelligentAgent_lib Utility_lib KnowledgeBase_lib Sensor_lib Inference_lib Actuator_lib)
