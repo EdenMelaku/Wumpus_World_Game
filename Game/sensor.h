@@ -1,5 +1,6 @@
-#ifndef SENSOR_H
-#define SENSOR_H
+#ifndef sensorInterface_H
+#define sensorInterface_H
+
 #include <tuple>
 
 
@@ -19,7 +20,7 @@ class sensor
 {
 public:
     sensor();
-    sensor(pair<int, int> location, Type type);
+    sensor(std::pair<int, int> location, Type type);
     pair<int, int> get_Location();
     Type get_type();
     void setType(Type type);
