@@ -2,7 +2,6 @@
 this is a playGround header file.
 this class is responsible for the dynamic behavoirs of the game
 creating a playable environment is the main task of this module
-
 */
 
 #ifndef PLAYGROUND_H
@@ -55,7 +54,7 @@ public:
     void kill_agent();
     void grub_gold();
     vector<sensor> execute();
-        vector<sensor> get_initial_perception();
+    vector<sensor> get_initial_perception();
 
 };
 #endif
