@@ -1,4 +1,4 @@
-#ifdef SENSOR_H
+#ifndef SENSOR_H
 #define SENSOR_H
 
 #include "../KnowledgeBase/KB.h"
@@ -19,3 +19,4 @@ class Sensor
      
 } 
 #endif
+

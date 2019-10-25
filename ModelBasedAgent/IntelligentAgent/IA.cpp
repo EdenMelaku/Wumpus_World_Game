@@ -1,10 +1,11 @@
 #include "IA.h"
-#include "../../utilities/DataStructures.h"
+#include "../utilities/DataStructures.h"
 #include <iostream>
 
 
 namespace agent{
 
+using namespace DataStructures;
 IntelligentAgent::IntelligentAgent(){
     ;
 }
