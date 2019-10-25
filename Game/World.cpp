@@ -3,8 +3,6 @@ this is a wumpus world Environment implementation code .
 
 
 */
-
-
 #include "World.h"
 
 
