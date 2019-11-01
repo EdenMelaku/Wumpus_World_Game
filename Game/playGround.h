@@ -11,7 +11,7 @@ creating a playable environment is the main task of this module
 #include "sensor.h"
 #include "actions.h"
 #include "playableWorld.h"
-#include "../ModelBasedAgent/utilities/DataStructures.h"
+#include "../IntelligentAgent/utilities/DataStructures.h"
 
 
 using namespace std;

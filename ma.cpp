@@ -2,8 +2,8 @@
 g++ --std=c++11 -o sample3 Room.cpp World.cpp playableWorld.cpp sensor.cpp actions.cpp playGround.cpp main.cpp -lncurses
 
 */
-#include "ModelBasedAgent/IntelligentAgent/IA.h"
-#include "ModelBasedAgent/components/Actuator/Actuator.h"
+#include "IntelligentAgent/agent/IntelligentAgent/IA.h"
+#include "IntelligentAgent/components/Actuator/Actuator.h"
 #include "Game/playGround.h"
 #include <iostream>
 #include <curses.h>
