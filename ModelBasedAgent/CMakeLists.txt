@@ -12,4 +12,3 @@ add_subdirectory(IntelligentAgent)
 
 add_library(iaww INTERFACE)
 target_link_libraries(iaww INTERFACE IntelligentAgent_lib)
-
