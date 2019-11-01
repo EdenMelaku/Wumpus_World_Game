@@ -1,0 +1,4 @@
+[submodule "IntelligentAgent"]
+	path = IntelligentAgent
+	url = https://github.com/arisemaM/IntelligentAgent-WumpusWorld.git
+	branch = stable
