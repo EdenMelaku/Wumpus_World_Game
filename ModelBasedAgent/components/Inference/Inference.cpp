@@ -106,8 +106,8 @@ DataStructures::Decision Inference::infer(std::pair<int, int> current_room)
  * @param room 
  */
 DataStructures::Decision Inference::rule_matching(std::pair<int, int> room){
-  std::cout << "-------------------------------" << std::endl;
-  std::cout << "Agent in: " << room.first << "," << room.second << std::endl;
+  // std::cout << "-------------------------------" << std::endl;
+  // std::cout << "Agent in: " << room.first << "," << room.second << std::endl;
 
   std::set<std::pair<int, int>> adjacentRooms = get_adjacent_rooms(room);
   
@@ -128,7 +128,7 @@ DataStructures::Decision Inference::rule_matching(std::pair<int, int> room){
     bool gold = current_kb.get_information_glitter(room);
 
     if(wumpus){
-        std::cout << "wumpus detected" << std::endl;
+        // std::cout << "wumpus detected" << std::endl;
         
         current_kb.change_information_wumpus(adj, true); // update knowledgebase
         
@@ -137,7 +137,7 @@ DataStructures::Decision Inference::rule_matching(std::pair<int, int> room){
     }
 
     if(pit){
-        std::cout << "pit detected in: " << adj.first << "," << adj.second << std::endl;
+        // std::cout << "pit detected in: " << adj.first << "," << adj.second << std::endl;
         
         current_kb.change_information_pit(adj, true); // update knowledgebase
         pit_rooms.push_back(adj);
@@ -146,7 +146,7 @@ DataStructures::Decision Inference::rule_matching(std::pair<int, int> room){
     }
 
     if(!wumpus && !pit){
-        std::cout << "room " << adj.first << "," << adj.second << " is ok" << std::endl;
+        // std::cout << "room " << adj.first << "," << adj.second << " is ok" << std::endl;
         
         current_kb.change_information_ok(adj, true); // update knowledgebase
         ok_rooms.push_back(adj);
@@ -154,7 +154,7 @@ DataStructures::Decision Inference::rule_matching(std::pair<int, int> room){
         d.decision = DataStructures::movement_decision::move_to;
     }
     if (gold){
-      std::cout << "Gold Found!" << std::endl;
+      // std::cout << "Gold Found!" << std::endl;
       d.decision = DataStructures::movement_decision::move_to;
     }
   }
