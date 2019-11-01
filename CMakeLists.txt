@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lncurses")
 
 add_subdirectory(Game)
-add_subdirectory(ModelBasedAgent)
+add_subdirectory(IntelligentAgent)
 
 set(ww ma.cpp)
 add_executable(wumpusworld ${ww})
