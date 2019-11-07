@@ -6,8 +6,7 @@ g++ --std=c++11 -o sample3 Room.cpp World.cpp playableWorld.cpp sensor.cpp actio
 #include "ModelBasedAgent/components/Actuator/Actuator.h"
 #include "Game/playGround.h"
 #include <iostream>
-#include <curses.h>
-#include <ncurses.h>
+
 #include <string.h>
 #include <thread>
 #include <chrono>
@@ -45,24 +44,18 @@ void ClearScreen()
 {
     int n;
     for (n = 0; n < 1; n++)
-        ui = ui + "\n\n\n\n\n\n\n\n\n\n";
+        ui = ui + "\n\n\n\n";
 }
 void printUI()
 {
     pair<int, int> location = pg.playableworld.agent_location;
     int b=9;
-    ostringstream values;
     Room room = pg.playableworld.world.boxes.at(location.first - 1).at(location.second - 1);
-    values<<pg.playableworld.pl;
-    ui = ui + values.str() + "\n";
-
-    ui = ui + "your direction= " + pg.playableworld.get_agent_direction() + "\n";
-    values<<pg.arrow;
-    ui = ui + "arrow left= " + values.str() + "\n";
-    values<<pg.playableworld.agent_location.second;
-    ui = ui + "location= " + values.str() + ",";
-    values<<pg.playableworld.agent_location.first;
-    ui=ui+ values.str() + "\n";
+    cout<<ui<< pg.playableworld.pl<< "\n";
+    cout<< "your direction= " << pg.playableworld.get_agent_direction() << "\n";
+    cout<<"arrow left= " <<pg.arrow<<  "\n";
+    cout<<"location= " <<pg.playableworld.agent_location.second<< ",";   
+    cout<<pg.playableworld.agent_location.first<<"\n";
 
     vector<vector<Room> >::reverse_iterator iter;
     int i = 0;
@@ -81,44 +74,42 @@ void printUI()
             bool here = (r.getLocation() == pg.playableworld.agent_location);
 
             if (r.get_breeze()) s = s + "B"; 
-            else s = s + " "; 
+            //else s = s + " "; 
             if (r.get_stench()) s = s + "S"; 
-            else  s = s + " "; 
+           // else  s = s + " "; 
             if (r.get_glitter())  s = s + "G"; 
-            else  s = s + " "; 
+           // else  s = s + " "; 
             if (here) s = s + "YOU";
-            else s = s + "   ";
+           // else s = s + "   ";
             if (r.has_pit()) s = s + "P";
-            else s = s + " ";
+            //else s = s + " ";
             if (r.has_wumpus()) s = s + "W";
-            else s = s + " ";
+            //else s = s + " ";
 
-            values<<r.getLocation().first;
-            string x = values.str();
-            values<<r.getLocation().second;
-            string y = values.str();
-            // cout << setw(3) <<y<< setw(3) << "," << setw(3) << x<< setw(3) << s << setw(3) << "|";
-            ui = ui + " " + y + "," + x + " " + s + "|";
+            int x = r.getLocation().first;
+            int y = r.getLocation().second;
+            cout << setw(3) <<y<< setw(3) << "," << setw(3) << x<< setw(3) << s << setw(3) << "|";
+            //cout<<" " << y << "," << x << " " << s << "|";
             j++;
         }
         i++;
-        //cout << endl;
-        ui = ui + "\n";
+        
+        ui="";
         for (int i = 0; i < size; i++)
         {
             ui = ui + "______________";
         }
+       // cout<<ui;
+        cout << endl;
     }
 
-    char disp[1000];
-    strcpy(disp, ui.c_str());
-    printw(disp);
+ 
     ClearScreen();
 }
   actions decision_to_action(DataStructures::Decision decision){
     pair<int,int> target_location;
     actions action=actions();
-    target_location=make_pair(decision.location.first, decision.location.second);
+    target_location=make_pair(decision.location.first+1, decision.location.second+1);
 
       if(decision.decision== DataStructures::movement_decision::move_to){
         action.move=true;
@@ -129,16 +120,20 @@ void printUI()
  if(target_location.first==pg.playableworld.agent_location.first){
      if(target_location.second>pg.playableworld.agent_location.second){
             pg.playableworld.turn_up();
+            action.turnup=true;
      }
      else{
          pg.playableworld.turn_down();
+         action.turndown=true;
      }
  }
  else if(target_location.first>pg.playableworld.agent_location.first){
      pg.playableworld.turn_right();
+     action.turnright=true;
  }
  else{
      pg.playableworld.turn_left();
+     action.turnleft=true;
  }
       return action;
 }
@@ -172,17 +167,28 @@ void agent_player()
     int i = 0;
 
     vector<sensor> sensor=pg.get_initial_perception();
-    DataStructures::Decision decision=intelligentAgent.go(pg.playableworld.agent_location, pg.p);
+    DataStructures::Decision decision = intelligentAgent.go(pg.playableworld.agent_location, pg.p);
+    cout<<"before"<<endl;
+    printUI();
+        cout<<"delay for second"<<endl;
 
     while (!pg.is_game_over())
     {   printUI();
-        chrono::milliseconds timespan(1000); 
+        chrono::milliseconds timespan(1000);
         this_thread::sleep_for(timespan);
         intelligentAgent.go(pg.playableworld.agent_location,pg.p);
         decision=intelligentAgent.decision;
         actions action=decision_to_action(decision);
         pg.action=action;
         pg.execute();
+        if(action.move) cout<<"move"<<" ->";
+        if(action.shoot) cout<<"shoot"<<"->";
+        if(action.turnleft) cout<<"left";
+        if(action.turnright) cout<<"right";
+        if(action.turnup) cout<<"up";
+        if(action.turndown) cout<<"down";
+        cout<<"------- location="<<decision.location.first<<","<<decision.location.second;
+        cout<<endl;
         
     }
     if (pg.is_agent_dead)
@@ -202,7 +208,7 @@ int main()
     cout << "enter size of wumpus world" << endl;
     cin >> size;
     world = World(size);
-    
+
         agent_player();
     
     

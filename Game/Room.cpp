@@ -1,5 +1,6 @@
-#include "Room.h"
+#include <iostream>
 
+#include "Room.h"
 
 Room::Room(){
     ;
@@ -7,6 +8,7 @@ Room::Room(){
 Room::Room(int row, int column)
 {
     location = make_pair(row, column);
+    cout<<"created room at"<<row<<" "<<column<<endl;
 }
 pair<int, int> Room::getLocation()
 {
