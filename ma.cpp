@@ -51,18 +51,12 @@ void printUI()
 {
     pair<int, int> location = pg.playableworld.agent_location;
     int b=9;
-    ostringstream values;
     Room room = pg.playableworld.world.boxes.at(location.first - 1).at(location.second - 1);
-    values<<pg.playableworld.pl;
-    ui = ui + values.str() + "\n";
-
-    ui = ui + "your direction= " + pg.playableworld.get_agent_direction() + "\n";
-    values<<pg.arrow;
-    ui = ui + "arrow left= " + values.str() + "\n";
-    values<<pg.playableworld.agent_location.second;
-    ui = ui + "location= " + values.str() + ",";
-    values<<pg.playableworld.agent_location.first;
-    ui=ui+ values.str() + "\n";
+    cout<<ui<< pg.playableworld.pl<< "\n";
+    cout<< "your direction= " << pg.playableworld.get_agent_direction() << "\n";
+    cout<<"arrow left= " <<pg.arrow<<  "\n";
+    cout<<"location= " <<pg.playableworld.agent_location.second<< ",";
+    cout<<pg.playableworld.agent_location.first<<"\n";
 
     vector<vector<Room> >::reverse_iterator iter;
     int i = 0;
@@ -80,39 +74,37 @@ void printUI()
             Room r = *i;
             bool here = (r.getLocation() == pg.playableworld.agent_location);
 
-            if (r.get_breeze()) s = s + "B"; 
-            else s = s + " "; 
-            if (r.get_stench()) s = s + "S"; 
-            else  s = s + " "; 
-            if (r.get_glitter())  s = s + "G"; 
-            else  s = s + " "; 
+            if (r.get_breeze()) s = s + "B";
+            //else s = s + " ";
+            if (r.get_stench()) s = s + "S";
+            // else  s = s + " ";
+            if (r.get_glitter())  s = s + "G";
+            // else  s = s + " ";
             if (here) s = s + "YOU";
-            else s = s + "   ";
+            // else s = s + "   ";
             if (r.has_pit()) s = s + "P";
-            else s = s + " ";
+            //else s = s + " ";
             if (r.has_wumpus()) s = s + "W";
-            else s = s + " ";
+            //else s = s + " ";
 
-            values<<r.getLocation().first;
-            string x = values.str();
-            values<<r.getLocation().second;
-            string y = values.str();
-            // cout << setw(3) <<y<< setw(3) << "," << setw(3) << x<< setw(3) << s << setw(3) << "|";
-            ui = ui + " " + y + "," + x + " " + s + "|";
+            int x = r.getLocation().first;
+            int y = r.getLocation().second;
+            cout << setw(3) <<y<< setw(3) << "," << setw(3) << x<< setw(3) << s << setw(3) << "|";
+            //cout<<" " << y << "," << x << " " << s << "|";
             j++;
         }
         i++;
-        //cout << endl;
-        ui = ui + "\n";
+
+        ui="";
         for (int i = 0; i < size; i++)
         {
             ui = ui + "______________";
         }
+        // cout<<ui;
+        cout << endl;
     }
 
-    char disp[1000];
-    strcpy(disp, ui.c_str());
-    printw(disp);
+
     ClearScreen();
 }
   actions decision_to_action(DataStructures::Decision decision){
