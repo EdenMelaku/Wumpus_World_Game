@@ -8,14 +8,21 @@ The Wumpus world is a cave which has 4/4 rooms connected with passageways. So th
 ## Getting Started
 
 clone the repo
-### Prerequisites
+### Pre-requisites
 
 ncurses
 
 c++11
 
 ```
-Give examples
+cd IntelligentAgent
+git submodule init
+git pull
+mkdir ../build
+cd ../build
+cmake ..
+make
+./wumpusworld
 ```
 
 ## Running the tests
