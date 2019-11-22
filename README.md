@@ -17,7 +17,7 @@ c++11
 ```
 cd IntelligentAgent
 git submodule init
-git pull
+git submodule update
 mkdir ../build
 cd ../build
 cmake ..
